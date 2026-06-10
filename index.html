@@ -41,12 +41,12 @@
 
     /* SIDEBAR DASHBOARD */
     .sidebar {
-      width: 280px;
+      width: 220px; /* Slimmed down from 280px */
       background: var(--bg-sidebar);
       border-right: 1px solid var(--border);
       position: fixed;
       height: 100vh;
-      padding: 40px 20px;
+      padding: 40px 15px; /* Reduced side padding */
       display: flex;
       flex-direction: column;
       z-index: 100;
@@ -62,10 +62,10 @@
     }
     .nav-links { display: flex; flex-direction: column; gap: 10px; }
     .nav-links a {
-      color: var(--text-dim); text-decoration: none; padding: 12px 15px;
+      color: var(--text-dim); text-decoration: none; padding: 12px 10px;
       border-radius: 8px; transition: all 0.3s;
       border-left: 3px solid transparent;
-      font-size: 0.95rem; font-weight: 500;
+      font-size: 0.9rem; font-weight: 500;
     }
     .nav-links a:hover {
       background: rgba(0, 255, 204, 0.05); color: var(--text-bright);
@@ -74,9 +74,9 @@
 
     /* MAIN CONTENT AREA */
     .main-content {
-      margin-left: 280px;
+      margin-left: 220px; /* Adjusted to match new sidebar width */
       padding: 60px 5%;
-      width: calc(100% - 280px);
+      width: calc(100% - 220px); /* Adjusted to match new sidebar width */
     }
     .section { margin-bottom: 100px; scroll-margin-top: 60px; }
 
@@ -147,7 +147,7 @@
       .sidebar { width: 100%; height: auto; position: static; padding: 20px; border-right: none; border-bottom: 1px solid var(--border); flex-direction: row; align-items: center; justify-content: space-between;}
       .logo-area { margin-bottom: 0; display: flex; align-items: center; gap: 15px; }
       .logo-icon { margin: 0; width: 40px; height: 40px; font-size: 1rem; }
-      .nav-links { display: none; /* Hide links on mobile for simplicity in this template */ }
+      .nav-links { display: none; }
       .main-content { margin-left: 0; width: 100%; padding: 40px 20px; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; }
     }
