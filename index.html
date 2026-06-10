@@ -3,320 +3,324 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Network Security E-Portfolio</title>
+  <title>Security Developer Portfolio</title>
   <style>
-    :root{
-      --bg:#08111f;
-      --panel:#101b2e;
-      --panel2:#14233b;
-      --text:#eef6ff;
-      --muted:#a9bbd3;
-      --accent:#32d1ff;
-      --accent2:#8ee6a8;
-      --warning:#ffd166;
-      --line:rgba(255,255,255,.12);
-      --shadow:0 20px 45px rgba(0,0,0,.35);
-      --radius:22px;
+    :root {
+      --bg-dark: #070b14;
+      --bg-panel: rgba(16, 25, 43, 0.7);
+      --bg-sidebar: #04070c;
+      --accent-main: #00ffcc;
+      --accent-sec: #7b61ff;
+      --text-bright: #f8faff;
+      --text-dim: #94a3b8;
+      --border: rgba(0, 255, 204, 0.15);
+      --glow: 0 0 20px rgba(0, 255, 204, 0.2);
     }
-    [data-theme="light"]{
-      --bg:#f5f8ff;
-      --panel:#ffffff;
-      --panel2:#eef5ff;
-      --text:#102033;
-      --muted:#53667e;
-      --accent:#0066cc;
-      --accent2:#138a45;
-      --warning:#a56800;
-      --line:rgba(10,30,60,.14);
-      --shadow:0 18px 40px rgba(18,43,75,.12);
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: var(--bg-dark);
+      /* Cool network dot pattern */
+      background-image: radial-gradient(var(--border) 1px, transparent 1px);
+      background-size: 30px 30px;
+      color: var(--text-bright);
+      display: flex;
+      min-height: 100vh;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter, Segoe UI, Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(50,209,255,.18), transparent 32rem),
-        radial-gradient(circle at 80% 10%, rgba(142,230,168,.12), transparent 30rem),
-        var(--bg);
-      color:var(--text);
-      line-height:1.6;
+
+    /* TYPOGRAPHY */
+    h1, h2, h3 { font-weight: 700; margin-top: 0; }
+    h1 { font-size: 3rem; letter-spacing: -1px; }
+    h2 { font-size: 2rem; color: var(--accent-main); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 25px;}
+    p { color: var(--text-dim); line-height: 1.7; }
+    .mono { font-family: 'Courier New', Courier, monospace; letter-spacing: 1px; }
+
+    /* SIDEBAR DASHBOARD */
+    .sidebar {
+      width: 280px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
     }
-    a{color:inherit;text-decoration:none}
-    .topbar{
-      position:sticky;top:0;z-index:50;
-      backdrop-filter:blur(18px);
-      background:rgba(8,17,31,.72);
-      border-bottom:1px solid var(--line);
+    .logo-area { text-align: center; margin-bottom: 40px; }
+    .logo-icon {
+      width: 60px; height: 60px;
+      background: linear-gradient(45deg, var(--accent-main), var(--accent-sec));
+      border-radius: 12px; margin: 0 auto 15px;
+      display: grid; place-items: center;
+      font-size: 1.5rem; font-weight: 900; color: #000;
+      box-shadow: var(--glow);
     }
-    [data-theme="light"] .topbar{background:rgba(245,248,255,.82)}
-    .nav{
-      max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;
-      padding:12px 20px;gap:16px;
+    .nav-links { display: flex; flex-direction: column; gap: 10px; }
+    .nav-links a {
+      color: var(--text-dim); text-decoration: none; padding: 12px 15px;
+      border-radius: 8px; transition: all 0.3s;
+      border-left: 3px solid transparent;
+      font-size: 0.95rem; font-weight: 500;
     }
-    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
-    .logo{
-      width:42px;height:42px;border-radius:14px;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      display:grid;place-items:center;color:#06101d;font-weight:900;
-      box-shadow:0 0 22px rgba(50,209,255,.45);
+    .nav-links a:hover {
+      background: rgba(0, 255, 204, 0.05); color: var(--text-bright);
+      border-left: 3px solid var(--accent-main);
     }
-    .links{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-    .links a,.btn{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:var(--text);padding:9px 12px;border-radius:999px;
-      font-weight:650;font-size:.9rem;cursor:pointer;
+
+    /* MAIN CONTENT AREA */
+    .main-content {
+      margin-left: 280px;
+      padding: 60px 5%;
+      width: calc(100% - 280px);
     }
-    .links a:hover,.btn:hover{border-color:var(--accent);box-shadow:0 0 0 3px rgba(50,209,255,.12)}
-    .hero{
-      max-width:1180px;margin:0 auto;padding:58px 20px 34px;
-      display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;
+    .section { margin-bottom: 100px; scroll-margin-top: 60px; }
+
+    /* UI COMPONENTS */
+    .panel {
+      background: var(--bg-panel);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
     }
-    .badge{display:inline-flex;gap:8px;align-items:center;color:var(--accent2);font-weight:800;margin-bottom:14px}
-    h1{font-size:clamp(2.1rem,5vw,4.6rem);line-height:1.02;margin:0 0 18px;letter-spacing:-2px}
-    h2{font-size:clamp(1.5rem,3vw,2.35rem);line-height:1.1;margin:0 0 18px;letter-spacing:-1px}
-    h3{margin:0 0 10px;font-size:1.12rem}
-    p{margin:0 0 14px;color:var(--muted)}
-    .hero-card,.card,.panel{
-      background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));
-      border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .tag {
+      display: inline-block; padding: 6px 12px;
+      background: rgba(123, 97, 255, 0.15); border: 1px solid var(--accent-sec);
+      color: #b0a1ff; border-radius: 4px; font-size: 0.8rem;
+      margin: 0 5px 10px 0;
     }
-    [data-theme="light"] .hero-card,[data-theme="light"] .card,[data-theme="light"] .panel{background:var(--panel)}
-    .hero-card{padding:24px;position:relative;overflow:hidden}
-    .hero-card:before{
-      content:"";position:absolute;inset:-40% -30% auto auto;width:260px;height:260px;border-radius:50%;
-      background:rgba(50,209,255,.18);filter:blur(20px)
+
+    /* HERO SECTION */
+    .hero { display: flex; flex-direction: column; justify-content: center; min-height: 80vh; }
+    .hero-status { color: var(--accent-main); font-size: 0.9rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;}
+    .hero-status::before { content: ''; display: block; width: 10px; height: 10px; background: var(--accent-main); border-radius: 50%; box-shadow: 0 0 10px var(--accent-main); }
+
+    /* SKILLS BARS */
+    .skill-box { margin-bottom: 20px; }
+    .skill-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; }
+    .skill-track { height: 6px; background: #1a2333; border-radius: 3px; overflow: hidden; }
+    .skill-fill { height: 100%; background: var(--accent-main); box-shadow: var(--glow); width: 0; transition: width 1.5s ease-out; }
+
+    /* TIMELINE */
+    .timeline { border-left: 2px solid var(--border); padding-left: 30px; margin-left: 10px; }
+    .time-node { position: relative; margin-bottom: 35px; }
+    .time-node::before {
+      content: ''; position: absolute; left: -37px; top: 5px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg-dark); border: 2px solid var(--accent-main);
     }
-    .profile{
-      display:flex;gap:18px;align-items:center;position:relative;z-index:1
+    .time-node h3 { color: var(--text-bright); margin-bottom: 5px; }
+
+    /* EVIDENCE CARDS */
+    .card {
+      background: var(--bg-panel); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .avatar{
-      width:96px;height:96px;border-radius:30px;display:grid;place-items:center;
-      background:linear-gradient(135deg,#152a49,#214f7c);border:1px solid var(--line);
-      font-size:2.4rem;font-weight:900;color:var(--accent);
+    .card:hover { transform: translateY(-5px); box-shadow: var(--glow); border-color: var(--accent-main); }
+    .card-img { height: 140px; background: rgba(0,255,204,0.05); display: grid; place-items: center; font-size: 3rem; border-bottom: 1px solid var(--border); }
+    .card-body { padding: 20px; }
+
+    /* TERMINAL ACCORDION (Reflection) */
+    .terminal-prompt {
+      background: rgba(0,0,0,0.5); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 15px; overflow: hidden;
     }
-    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .chip{padding:7px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.82rem;background:rgba(255,255,255,.04)}
-    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#05101d;border:0;font-weight:900}
-    .section{max-width:1180px;margin:0 auto;padding:32px 20px}
-    .grid{display:grid;gap:18px}
-    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
-    .card{padding:20px}
-    .card .icon{font-size:2rem;margin-bottom:10px}
-    .mini{font-size:.86rem;color:var(--muted)}
-    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
-    .stat{padding:16px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
-    .stat b{display:block;font-size:1.75rem;color:var(--accent)}
-    .timeline{position:relative;margin-top:10px}
-    .timeline:before{content:"";position:absolute;left:18px;top:8px;bottom:8px;width:2px;background:var(--line)}
-    .timeitem{position:relative;padding:0 0 22px 52px}
-    .dot{position:absolute;left:8px;top:2px;width:22px;height:22px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px rgba(50,209,255,.12)}
-    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 20px}
-    .tab{padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);cursor:pointer;color:var(--muted);font-weight:750}
-    .tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06101d;border:0}
-    .tab-content{display:none}
-    .tab-content.active{display:block}
-    .project-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-    .filter{padding:9px 12px;border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:999px;color:var(--text);cursor:pointer}
-    .filter.active{border-color:var(--accent);background:rgba(50,209,255,.13)}
-    .project-card{overflow:hidden;padding:0}
-    .project-cover{height:120px;background:linear-gradient(135deg,rgba(50,209,255,.25),rgba(142,230,168,.15));display:grid;place-items:center;font-size:2.7rem}
-    .project-body{padding:18px}
-    .tag{display:inline-block;margin:3px 3px 3px 0;font-size:.78rem;padding:5px 8px;border-radius:999px;background:rgba(50,209,255,.12);border:1px solid rgba(50,209,255,.22);color:var(--accent)}
-    .skill{margin:14px 0}
-    .skill-top{display:flex;justify-content:space-between;font-weight:750;font-size:.93rem}
-    .bar{height:10px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin-top:7px;border:1px solid var(--line)}
-    .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px;transition:width 1s ease}
-    .accordion{border:1px solid var(--line);border-radius:18px;margin:10px 0;overflow:hidden;background:rgba(255,255,255,.035)}
-    .accordion button{width:100%;text-align:left;background:transparent;color:var(--text);border:0;padding:16px;font-weight:850;cursor:pointer;font-size:1rem;display:flex;justify-content:space-between;gap:10px}
-    .acc-body{display:none;padding:0 16px 16px;color:var(--muted)}
-    .accordion.open .acc-body{display:block}
-    .checklist{display:grid;gap:12px}
-    .check{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.035)}
-    .check input{margin-top:6px;accent-color:var(--accent)}
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99;display:none;align-items:center;justify-content:center;padding:20px}
-    .modal.open{display:flex}
-    .modal-inner{max-width:760px;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:22px;max-height:86vh;overflow:auto}
-    .modal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}
-    .x{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);border-radius:12px;padding:8px 11px;cursor:pointer}
-    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:16px}
-    th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
-    th{color:var(--accent);background:rgba(50,209,255,.09)}
-    .footer{padding:32px 20px;border-top:1px solid var(--line);text-align:center;color:var(--muted);margin-top:28px}
-    .print-note{display:none}
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr;padding-top:34px}.grid.cols-3,.grid.cols-2,.stat-row{grid-template-columns:1fr}.links{display:none}
+    .terminal-header {
+      padding: 15px 20px; cursor: pointer; display: flex; align-items: center; gap: 10px;
+      color: var(--accent-main); font-weight: 600; background: rgba(255,255,255,0.02);
+    }
+    .terminal-body { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease; color: var(--text-dim); }
+    .terminal-prompt.open .terminal-body { padding: 20px; max-height: 500px; border-top: 1px solid rgba(255,255,255,0.05); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: static; padding: 20px; border-right: none; border-bottom: 1px solid var(--border); flex-direction: row; align-items: center; justify-content: space-between;}
+      .logo-area { margin-bottom: 0; display: flex; align-items: center; gap: 15px; }
+      .logo-icon { margin: 0; width: 40px; height: 40px; font-size: 1rem; }
+      .nav-links { display: none; /* Hide links on mobile for simplicity in this template */ }
+      .main-content { margin-left: 0; width: 100%; padding: 40px 20px; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-<body data-theme="dark">
-  <header class="topbar">
-    <nav class="nav">
-      <a href="#home" class="brand"><span class="logo">CS</span><span>CSA30203 E-Portfolio</span></a>
-      <div class="links">
-        <a href="#career">Career Exploration</a>
-        <a href="#skills">Skills Assessment</a>
-        <a href="#timeline">Development Plan</a>
-        <a href="#evidence">Evidence</a>
-        <a href="#reflection">Reflection</a>
-        <button class="btn" onclick="toggleTheme()">Toggle Theme</button>
-      </div>
-    </nav>
-  </header>
+<body>
 
-  <main id="home">
-    <section class="hero">
+  <aside class="sidebar">
+    <div class="logo-area">
+      <div class="logo-icon">CS</div>
+      <div style="font-weight: 700; letter-spacing: 1px;">CSA30203</div>
+      <div class="mono" style="font-size: 0.75rem; color: var(--text-dim); margin-top: 5px;">SYS_PORTFOLIO_v1</div>
+    </div>
+    <nav class="nav-links">
+      <a href="#hero">00 // INIT_PROFILE</a>
+      <a href="#career">01 // CAREER_TARGET</a>
+      <a href="#skills">02 // SKILL_MATRIX</a>
+      <a href="#timeline">03 // DEV_PLAN</a>
+      <a href="#evidence">04 // EVIDENCE_LOG</a>
+      <a href="#reflection">05 // REFLECTION</a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    
+    <section id="hero" class="section hero">
+      <div class="hero-status mono">SYSTEM ONLINE // STATUS: SECURE</div>
+      <h1>[Your Name Here]</h1>
+      <p style="font-size: 1.2rem; max-width: 700px; margin-bottom: 30px;">
+        Final-year computer science student transitioning established skills in C# application development, VR simulation, and digital networking into modern network security architecture.
+      </p>
       <div>
-        <div class="badge">● Individual e-Portfolio (20%)</div>
-        <h1>[Your Name Here]</h1>
-        <p style="font-size:1.1rem;max-width:760px">Final-year computer science student at UniSZA Kampus Besut, transitioning established skills in C# game development, VR simulation, and digital networking into modern network security architecture.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#evidence">View Evidence</a>
-        </div>
+        <span class="tag mono">UNITY/C#</span>
+        <span class="tag mono">DEV_SEC_OPS</span>
+        <span class="tag mono">DATA_COMMS</span>
       </div>
-      <aside class="hero-card">
-        <div class="profile">
-          <div class="avatar">CS</div>
-          <div>
-            <h3>Career Focus</h3>
-            <p>Security-Focused Software Developer</p>
-            <div class="chips">
-              <span class="chip">Unity/C#</span><span class="chip">App Security</span><span class="chip">Data Comms</span><span class="chip">VR Dev</span>
-            </div>
-          </div>
-        </div>
-      </aside>
     </section>
 
     <section id="career" class="section">
-      <div class="grid cols-2">
-        <div class="card">
-          <h2>Career Exploration</h2>
-          <h3>Role: Security-Focused Software Developer</h3>
-          <p><strong>Responsibilities:</strong> Designing, building, and testing software with security integrated from the ground up (DevSecOps). This involves writing secure C# logic, preventing vulnerabilities in applications, and ensuring secure data communication across networks.</p>
+      <h2 class="mono">01 // CAREER EXPLORATION</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Target Role: Security-Focused Software Developer</h3>
+          <p><strong>Responsibilities:</strong> Designing, building, and testing software with security integrated from the ground up (DevSecOps). This involves writing secure C# logic, preventing vulnerabilities natively within applications, and ensuring secure data communication across network layers.</p>
         </div>
-        <div class="card">
-          <h2>Relevance to Modern Cybersecurity</h2>
-          <p>As applications (including VR, games, and mobile tools) handle increasingly sensitive data, the traditional model of adding security *after* development is obsolete. Modern cybersecurity requires developers who understand network layering, secure authentication, and how to prevent exploits natively within the code structure.</p>
+        <div class="panel">
+          <h3>Cybersecurity Relevance</h3>
+          <p>The traditional model of adding security <em>after</em> an app is built is obsolete. Modern cyber threats target application layers directly. The industry requires developers who understand network architecture (OSI models) and can prevent exploits natively within the code before deployment.</p>
         </div>
       </div>
     </section>
 
     <section id="skills" class="section">
-      <h2>Personal Skills Assessment</h2>
-      <div class="tabs">
-        <button class="tab active" onclick="openTab(event,'technical')">Current Technical Skills</button>
-        <button class="tab" onclick="openTab(event,'soft')">Soft Skills</button>
-        <button class="tab" onclick="openTab(event,'compare')">Industry Comparison</button>
-      </div>
-      <div id="technical" class="tab-content active">
-        <div class="grid cols-2">
-          <div class="card">
-            <h3>Technical Competencies</h3>
-            <div class="skill"><div class="skill-top"><span>C# & Unity Engine</span><span>85%</span></div><div class="bar"><div class="fill" data-w="85%"></div></div></div>
-            <div class="skill"><div class="skill-top"><span>Networking Basics (OSI / TCP/IP)</span><span>70%</span></div><div class="bar"><div class="fill" data-w="70%"></div></div></div>
-            <div class="skill"><div class="skill-top"><span>3D Modeling & Digital Design</span><span>80%</span></div><div class="bar"><div class="fill" data-w="80%"></div></div></div>
+      <h2 class="mono">02 // PERSONAL SKILLS ASSESSMENT</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3 style="margin-bottom: 25px;">Current Technical Specs</h3>
+          <div class="skill-box">
+            <div class="skill-label"><span class="mono">C# & Unity Engine</span><span>85%</span></div>
+            <div class="skill-track"><div class="skill-fill" style="width: 85%;"></div></div>
           </div>
-          <div class="card">
-            <h3>Evidence Base</h3>
-            <table><tr><th>Skill</th><th>Evidence</th></tr><tr><td>Programming</td><td>Developed complex game mechanics and logic for C.U.R.E prototype.</td></tr><tr><td>Networking</td><td>ITF33603 Data Communication assignments.</td></tr></table>
+          <div class="skill-box">
+            <div class="skill-label"><span class="mono">Networking (OSI & TCP/IP)</span><span>75%</span></div>
+            <div class="skill-track"><div class="skill-fill" style="width: 75%;"></div></div>
+          </div>
+          <div class="skill-box">
+            <div class="skill-label"><span class="mono">Interactive Digital Design</span><span>80%</span></div>
+            <div class="skill-track"><div class="skill-fill" style="width: 80%;"></div></div>
           </div>
         </div>
-      </div>
-      <div id="soft" class="tab-content">
-        <div class="grid cols-3">
-          <div class="card"><div class="icon">🗣️</div><h3>Communication</h3><p>Handling social media and public announcements effectively for JPLK Kampus Besut.</p></div>
-          <div class="card"><div class="icon">🤝</div><h3>Teamwork</h3><p>Collaborating on digital visibility and marketing strategies (e.g., Pink Corner project).</p></div>
-          <div class="card"><div class="icon">🧩</div><h3>Problem Solving</h3><p>Iterating on user feedback to improve educational designs (e.g., KIAS project).</p></div>
-        </div>
-      </div>
-      <div id="compare" class="tab-content">
-        <div class="card">
-            <h3>Current Skills vs. Industry Requirements</h3>
-            <p>While my foundational programming in C# and understanding of network models (OSI) are strong, industry standards for a Security-Focused Developer require specific knowledge of secure coding practices (like OWASP Top 10), penetration testing tools, and formal security certifications which I am currently developing.</p>
+        <div class="panel">
+          <h3 style="margin-bottom: 25px;">Soft Skills & Industry Gap</h3>
+          <p><strong>Team & Comms:</strong> Proven collaboration in digital strategy (Pink Corner project) and social media management for university committees.</p>
+          <p><strong>Problem Solving:</strong> Iterating on educational designs based on user feedback (KIAS project).</p>
+          <div style="border-top: 1px dashed var(--border); margin-top: 20px; padding-top: 20px;">
+            <strong style="color: var(--accent-sec);">> Gap Analysis:</strong>
+            <p style="font-size: 0.9rem; margin-top: 10px;">While foundational programming is strong, industry standards require formal knowledge of secure coding (OWASP) and penetration tools, which dictates my development plan.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="timeline" class="section">
-      <h2>Career Development Plan</h2>
-      <div class="panel" style="padding:22px">
+      <h2 class="mono">03 // CAREER DEVELOPMENT PLAN</h2>
+      <div class="panel">
         <div class="timeline">
-          <div class="timeitem"><span class="dot"></span><h3>Short-Term: Next 6 Months</h3><p>Complete FYP successfully. Master tools like Wireshark to analyze network traffic and learn Python for automation scripting.</p></div>
-          <div class="timeitem"><span class="dot"></span><h3>Short-Term: 2 Years</h3><p>Obtain foundational security certifications such as CompTIA Security+. Secure a junior software development role focusing on building secure application architectures.</p></div>
-          <div class="timeitem"><span class="dot"></span><h3>Long-Term: 5 Years</h3><p>Transition into a mid-level Security-Focused Software Developer or DevSecOps Engineer. Potentially pursue advanced certifications like AWS Certified Security.</p></div>
+          <div class="time-node">
+            <h3>Short-Term: Next 6 Months</h3>
+            <p>Complete FYP successfully. Master essential network analysis tools like <strong>Wireshark</strong> to monitor traffic, and learn <strong>Python</strong> for security automation scripting.</p>
+          </div>
+          <div class="time-node">
+            <h3>Mid-Term: 2 Years</h3>
+            <p>Obtain foundational security certifications such as <strong>CompTIA Security+</strong>. Secure a junior software development role focusing on building secure application architectures.</p>
+          </div>
+          <div class="time-node">
+            <h3>Long-Term: 5 Years</h3>
+            <p>Transition into a mid-level Security-Focused Software Developer or DevSecOps Engineer. Potentially pursue advanced cloud security certifications like <strong>AWS Certified Security</strong>.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="evidence" class="section">
-      <h2>Evidence of Learning</h2>
-      <p>Click a project card to view specific learning outcomes and tools used.</p>
-      <div class="grid cols-3" id="projectGrid">
-        <article class="card project-card" onclick="showProject(0)"><div class="project-cover">🎮</div><div class="project-body"><h3>C.U.R.E. Prototype</h3><p>3D game prototype featuring complex logic and C# programming.</p><span class="tag">Unity</span><span class="tag">C#</span></div></article>
-        <article class="card project-card" onclick="showProject(1)"><div class="project-cover">🥽</div><div class="project-body"><h3>SchizoMind VR</h3><p>Educational VR simulation built with Google VR toolkits.</p><span class="tag">VR</span><span class="tag">Development</span></div></article>
-        <article class="card project-card" onclick="showProject(2)"><div class="project-cover">🌐</div><div class="project-body"><h3>Data Communication</h3><p>Coursework mapping OSI models and TCP/IP protocol suites.</p><span class="tag">Networking</span><span class="tag">ITF33603</span></div></article>
+      <h2 class="mono">04 // EVIDENCE OF LEARNING</h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-img">🎮</div>
+          <div class="card-body">
+            <h3>C.U.R.E. Prototype</h3>
+            <p style="font-size: 0.85rem;">3D game prototype featuring complex object-oriented logic and C# programming.</p>
+            <span class="tag mono">Unity</span><span class="tag mono">C#</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img">🥽</div>
+          <div class="card-body">
+            <h3>SchizoMind VR</h3>
+            <p style="font-size: 0.85rem;">Educational VR simulation built with Google VR toolkits. Demonstrates interactive scripting.</p>
+            <span class="tag mono">VR</span><span class="tag mono">Scripting</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img">🌐</div>
+          <div class="card-body">
+            <h3>Data Comm Coursework</h3>
+            <p style="font-size: 0.85rem;">Academic mapping of OSI models, TCP/IP protocol suites, and network layers (ITF33603).</p>
+            <span class="tag mono">Networking</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="reflection" class="section">
-      <h2>Personal Reflection: [Your Dream Company Name]</h2>
-      <div class="accordion open"><button onclick="toggleAcc(this)">Why do you want to work for this company? <span>+</span></button><div class="acc-body"><p>[Insert why their mission aligns with your interest in secure, interactive software]</p></div></div>
-      <div class="accordion"><button onclick="toggleAcc(this)">What value can you bring / Why should we hire you? <span>+</span></button><div class="acc-body"><p>I bring a unique hybrid of interactive media development (Unity/VR) and a strong foundation in network communication. I understand not just how to build engaging applications, but the underlying data structures that power them.</p></div></div>
-      <div class="accordion"><button onclick="toggleAcc(this)">What are your strengths and weaknesses? <span>+</span></button><div class="acc-body"><p><strong>Strength:</strong> Adaptability and self-driven learning, evidenced by independently mastering complex tools like ZBrush, Maya, and Unity. <br><strong>Weakness:</strong> I am currently bridging the gap between standard development and enterprise-level network security, which I am addressing through my certification timeline.</p></div></div>
+      <h2 class="mono">05 // PERSONAL REFLECTION</h2>
+      <p style="margin-bottom: 20px;">Target Company: <strong>[Your Dream Company]</strong></p>
+      
+      <div class="terminal-prompt open">
+        <div class="terminal-header" onclick="toggleTerminal(this)">
+          <span class="mono">>_ Why do you want to work for this company?</span>
+        </div>
+        <div class="terminal-body">
+          <p>[Insert why their mission aligns with your interest in secure, interactive software. e.g., "I admire your dedication to building secure educational platforms..."]</p>
+        </div>
+      </div>
+
+      <div class="terminal-prompt">
+        <div class="terminal-header" onclick="toggleTerminal(this)">
+          <span class="mono">>_ What value can you bring / Why hire you?</span>
+        </div>
+        <div class="terminal-body">
+          <p>I bring a unique hybrid of interactive media development (Unity/VR) and a strong foundation in network communication. I understand not just how to build engaging applications that users love, but the underlying data structures and network layers that power them.</p>
+        </div>
+      </div>
+
+      <div class="terminal-prompt">
+        <div class="terminal-header" onclick="toggleTerminal(this)">
+          <span class="mono">>_ What are your strengths and weaknesses?</span>
+        </div>
+        <div class="terminal-body">
+          <p><strong>Strength:</strong> High adaptability and self-driven learning, evidenced by independently mastering complex visual tools (ZBrush, Maya) alongside backend logic (Unity C#).</p>
+          <p><strong>Weakness:</strong> I am currently bridging the gap between standard software development and enterprise-level network security, a gap I am actively closing through my certification timeline.</p>
+        </div>
+      </div>
     </section>
+
   </main>
 
-  <div class="modal" id="modal" onclick="closeModal(event)">
-    <div class="modal-inner" onclick="event.stopPropagation()">
-      <div class="modal-head"><div><h2 id="modalTitle">Project</h2><p id="modalIntro"></p></div><button class="x" onclick="closeModal()">Close</button></div>
-      <div id="modalBody"></div>
-    </div>
-  </div>
-
-<script>
-const projects = [
-  {title:'C.U.R.E. Game Prototype',intro:'A 3D action RPG prototype focusing on character movement, boss logic, and asset generation.',tools:'Unity, C#, Maya, Blender',skills:'Object-oriented programming, logic architecture, UI integration',evidence:'[Insert link to GitHub repo or screenshot of code]'},
-  {title:'SchizoMind VR',intro:'An educational VR simulation designed to provide perspective on human perception.',tools:'Unity 2019, Google VR (GVR) SDK',skills:'Virtual reality deployment, interactive scripting, auditory/visual rendering',evidence:'[Insert project report or simulation screenshot]'},
-  {title:'Data Communication (ITF33603)',intro:'Academic exploration of network architectures.',tools:'Course materials, network diagrams',skills:'Understanding OSI layers, TCP/IP protocols, network layering fundamentals',evidence:'[Insert coursework PDF or diagram screenshot]'}
-];
-function toggleTheme(){
-  const b=document.body;
-  b.dataset.theme=b.dataset.theme==='dark'?'light':'dark';
-}
-function openTab(evt,id){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
-  evt.currentTarget.classList.add('active');
-  document.getElementById(id).classList.add('active');
-}
-function showProject(i){
-  const p=projects[i];
-  document.getElementById('modalTitle').textContent=p.title;
-  document.getElementById('modalIntro').textContent=p.intro;
-  document.getElementById('modalBody').innerHTML=`
-    <table>
-      <tr><th>Tools Used</th><td>${p.tools}</td></tr>
-      <tr><th>Skills Demonstrated</th><td>${p.skills}</td></tr>
-      <tr><th>Suggested Evidence</th><td>${p.evidence}</td></tr>
-    </table>`;
-  document.getElementById('modal').classList.add('open');
-}
-function closeModal(e){
-  if(e && e.target.id!=='modal') return;
-  document.getElementById('modal').classList.remove('open');
-}
-function toggleAcc(btn){
-  btn.parentElement.classList.toggle('open');
-}
-function animateBars(){
-  document.querySelectorAll('.fill[data-w]').forEach(f=>{f.style.width=f.dataset.w});
-}
-window.addEventListener('load',()=>{animateBars();});
-window.addEventListener('keydown',e=>{if(e.key==='Escape') document.getElementById('modal').classList.remove('open')});
-</script>
+  <script>
+    // Simple script to handle the terminal accordion animation
+    function toggleTerminal(element) {
+      const parent = element.parentElement;
+      parent.classList.toggle('open');
+    }
+  </script>
 </body>
 </html>
