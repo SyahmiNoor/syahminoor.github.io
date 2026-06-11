@@ -206,29 +206,63 @@
       border-right: 1px solid rgba(255, 255, 255, 0.03);
     }
     .modal-value { width: 72%; padding: 1rem 1.25rem; color: var(--text-primary); font-size: 0.95rem; }
-    
-    /* MEDIA EVIDENCE SECTION STYLES */
-    .evidence-visuals {
+
+    /* SMART AUTO-ARRANGING IMAGE GALLERY */
+    .evidence-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
       margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
     }
-    .evidence-visuals img, 
-    .evidence-visuals video {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    .evidence-item {
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .evidence-gallery img {
+      width: 100%; height: 180px; /* Uniform smaller size inside modal */
+      object-fit: cover; border-radius: 8px; border: 1px solid var(--border);
+      cursor: zoom-in; transition: transform 0.2s, border-color 0.2s;
+    }
+    .evidence-gallery img:hover {
+      transform: translateY(-2px); border-color: var(--accent);
     }
     .evidence-caption {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      text-align: center;
-      margin-top: -0.5rem;
-      font-style: italic;
+      font-size: 0.85rem; color: var(--text-secondary);
+      text-align: center; font-style: italic;
     }
+    
+    /* Layout Rules for different image counts */
+    /* If exactly 1 image: Span full width and allow natural height */
+    .evidence-gallery .evidence-item:only-child { grid-column: 1 / -1; }
+    .evidence-gallery .evidence-item:only-child img { height: auto; max-height: 400px; }
+    
+    /* If exactly 3 images: Make the 3rd image span the bottom nicely */
+    .evidence-gallery .evidence-item:nth-child(3):last-child { grid-column: 1 / -1; }
+    .evidence-gallery .evidence-item:nth-child(3):last-child img { height: auto; max-height: 300px; }
+
+
+    /* FULL-SCREEN LIGHTBOX OVERLAY */
+    .lightbox-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.92); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .lightbox-overlay.active { opacity: 1; pointer-events: auto; }
+    .lightbox-img {
+      max-width: 90vw; max-height: 90vh;
+      border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      transform: scale(0.95); transition: transform 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .lightbox-overlay.active .lightbox-img { transform: scale(1); }
+    .lightbox-close {
+      position: absolute; top: 1.5rem; right: 2rem;
+      background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%; color: #fff; width: 45px; height: 45px;
+      font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .lightbox-close:hover { background: var(--accent); border-color: var(--accent); transform: scale(1.1); }
 
     /* REFLECTION Q&A */
     .qa-box {
@@ -247,11 +281,15 @@
       .modal-row { flex-direction: column; }
       .modal-label, .modal-value { width: 100%; padding: 0.85rem 1rem; }
       .modal-label { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
+      .evidence-gallery { grid-template-columns: 1fr; }
+      .evidence-gallery .evidence-item:nth-child(3):last-child { grid-column: auto; }
+      .evidence-gallery img { height: auto; }
     }
   </style>
 </head>
 <body>
 
+  <!-- DYNAMIC BACKGROUND LAYER -->
   <div class="bg-gradient" id="bg-gradient"></div>
 
   <header class="topbar">
@@ -420,6 +458,11 @@
 
   </main>
 
+  <!-- ============================================== -->
+  <!-- MODALS FOR EVIDENCE (WITH IMAGE GALLERY)       -->
+  <!-- ============================================== -->
+
+  <!-- MODAL 1: C.U.R.E. -->
   <div class="modal-overlay" id="modal-cure" onclick="closeModal('modal-cure')">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="close-btn" onclick="closeModal('modal-cure')">Close</button>
@@ -441,20 +484,34 @@
         </div>
       </div>
 
-      <div class="evidence-visuals">
-        <img src="your-image-filename.jpg" alt="CURE Game Screenshot">
-        <div class="evidence-caption">Screenshot of the C.U.R.E. development environment.</div>
+      <!-- IMAGE GALLERY: Example with 4 Images -->
+      <div class="evidence-gallery">
+        <div class="evidence-item">
+          <!-- Replace src with your image file -->
+          <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=Image+1" alt="CURE Game Screenshot" onclick="openLightbox(this.src)">
+          <div class="evidence-caption">Screenshot 1: Core gameplay logic</div>
+        </div>
         
-        <video controls>
-          <source src="your-video-filename.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <div class="evidence-caption">Video demonstration of boss logic and character movement.</div>
+        <div class="evidence-item">
+          <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=Image+2" alt="CURE Game Screenshot" onclick="openLightbox(this.src)">
+          <div class="evidence-caption">Screenshot 2: Boss fight mechanics</div>
+        </div>
+
+        <div class="evidence-item">
+          <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=Image+3" alt="CURE Game Screenshot" onclick="openLightbox(this.src)">
+          <div class="evidence-caption">Screenshot 3: 3D Asset generation</div>
+        </div>
+
+        <div class="evidence-item">
+          <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=Image+4" alt="CURE Game Screenshot" onclick="openLightbox(this.src)">
+          <div class="evidence-caption">Screenshot 4: State management</div>
+        </div>
       </div>
 
     </div>
   </div>
 
+  <!-- MODAL 2: SchizoMind VR -->
   <div class="modal-overlay" id="modal-vr" onclick="closeModal('modal-vr')">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="close-btn" onclick="closeModal('modal-vr')">Close</button>
@@ -476,14 +533,23 @@
         </div>
       </div>
 
-      <div class="evidence-visuals">
-        <img src="FYP_Logo.png" alt="VR Simulation Screenshot">
-        <div class="evidence-caption">Screenshot of the VR visual distortion implementation.</div>
+      <!-- IMAGE GALLERY: Example with 2 Images -->
+      <div class="evidence-gallery">
+        <div class="evidence-item">
+          <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=VR+Screenshot+1" alt="VR Simulation" onclick="openLightbox(this.src)">
+          <div class="evidence-caption">Screenshot of VR distortion effect.</div>
+        </div>
+        
+        <div class="evidence-item">
+          <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=VR+Screenshot+2" alt="VR Simulation" onclick="openLightbox(this.src)">
+          <div class="evidence-caption">Screenshot of the GVR environment setup.</div>
+        </div>
       </div>
       
     </div>
   </div>
 
+  <!-- MODAL 3: Data Communication -->
   <div class="modal-overlay" id="modal-network" onclick="closeModal('modal-network')">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="close-btn" onclick="closeModal('modal-network')">Close</button>
@@ -505,12 +571,21 @@
         </div>
       </div>
 
-      <div class="evidence-visuals">
-        <img src="your-diagram-image.jpg" alt="Network Architecture Diagram">
-        <div class="evidence-caption">Network architecture diagram from coursework.</div>
+      <!-- IMAGE GALLERY: Example with 1 Image -->
+      <div class="evidence-gallery">
+        <div class="evidence-item">
+          <img src="https://via.placeholder.com/800x400/141e33/38bdf8?text=Network+Diagram" alt="Network Architecture Diagram" onclick="openLightbox(this.src)">
+          <div class="evidence-caption">Network architecture diagram from coursework.</div>
+        </div>
       </div>
       
     </div>
+  </div>
+
+  <!-- FULL-SCREEN LIGHTBOX MODAL -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img src="" class="lightbox-img" id="lightbox-img" alt="Enlarged Evidence" onclick="event.stopPropagation()">
   </div>
 
   <script>
@@ -525,8 +600,27 @@
       document.body.style.overflow = 'auto'; 
     }
 
+    /* Lightbox Functions */
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      // Clear image source after animation finishes
+      setTimeout(() => { document.getElementById('lightbox-img').src = ''; }, 300);
+    }
+
+    /* Escape Key Handler (Closes Lightbox first, then Modals) */
     document.addEventListener('keydown', function(event) {
       if (event.key === 'Escape') {
+        const lightbox = document.getElementById('lightbox');
+        if (lightbox.classList.contains('active')) {
+          closeLightbox();
+          return;
+        }
+
         const activeModals = document.querySelectorAll('.modal-overlay.active');
         activeModals.forEach(modal => {
           modal.classList.remove('active');
