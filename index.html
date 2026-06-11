@@ -28,7 +28,6 @@
       margin: 0;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg-main);
-      /* Subtle ambient background that stays fixed */
       background-image: radial-gradient(circle at top left, rgba(56, 189, 248, 0.05), transparent 40%),
                         radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.05), transparent 40%);
       background-attachment: fixed;
@@ -98,7 +97,7 @@
     .main-content {
       max-width: 1100px; margin: 0 auto;
       padding: 3rem 4%;
-      position: relative; /* Ensures it sits above the fixed background */
+      position: relative;
     }
     .section { margin-bottom: 4rem; scroll-margin-top: 5rem; }
 
@@ -168,7 +167,7 @@
     .evidence-content p { font-size: 0.85rem; margin-bottom: 1rem; flex-grow: 1; }
     .view-prompt { font-size: 0.8rem; color: var(--accent); font-weight: 600; margin-top: auto; }
 
-    /* MODAL (POP-UP) SYSTEM - COMPACT TABLE STYLE */
+    /* MODAL (POP-UP) SYSTEM */
     .modal-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
       background-color: rgba(10, 15, 28, 0.85); backdrop-filter: blur(5px);
@@ -207,7 +206,29 @@
       border-right: 1px solid rgba(255, 255, 255, 0.03);
     }
     .modal-value { width: 72%; padding: 1rem 1.25rem; color: var(--text-primary); font-size: 0.95rem; }
-    .modal-note { font-size: 0.85rem; color: var(--text-secondary); margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+    
+    /* MEDIA EVIDENCE SECTION STYLES */
+    .evidence-visuals {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .evidence-visuals img, 
+    .evidence-visuals video {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+    .evidence-caption {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-top: -0.5rem;
+      font-style: italic;
+    }
 
     /* REFLECTION Q&A */
     .qa-box {
@@ -231,7 +252,6 @@
 </head>
 <body>
 
-  <!-- DYNAMIC BACKGROUND LAYER -->
   <div class="bg-gradient" id="bg-gradient"></div>
 
   <header class="topbar">
@@ -416,16 +436,22 @@
           <div class="modal-value">Object-oriented programming, boss logic architecture, 3D asset generation, state management</div>
         </div>
         <div class="modal-row">
-          <div class="modal-label">Suggested Evidence</div>
-          <div class="modal-value">C# scripts for character movement, screenshots of the Unity editor environment, generated 3D models</div>
-        </div>
-        <div class="modal-row">
           <div class="modal-label">Reflection</div>
           <div class="modal-value">This project strengthened my ability to architect complex state machines in C# and gave me a deep understanding of how applications process logic natively.</div>
         </div>
       </div>
-      
-      <p class="modal-note">Student note: Provide actual screenshots or snippets of your C# scripts in your final submission document.</p>
+
+      <div class="evidence-visuals">
+        <img src="your-image-filename.jpg" alt="CURE Game Screenshot">
+        <div class="evidence-caption">Screenshot of the C.U.R.E. development environment.</div>
+        
+        <video controls>
+          <source src="your-video-filename.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="evidence-caption">Video demonstration of boss logic and character movement.</div>
+      </div>
+
     </div>
   </div>
 
@@ -445,16 +471,16 @@
           <div class="modal-value">Virtual reality deployment, interactive scripting, auditory and visual rendering pipelines</div>
         </div>
         <div class="modal-row">
-          <div class="modal-label">Suggested Evidence</div>
-          <div class="modal-value">Project synopsis reports, screenshots of visual distortion implementations, GVR setup configurations</div>
-        </div>
-        <div class="modal-row">
           <div class="modal-label">Reflection</div>
           <div class="modal-value">This project demonstrated how to bridge the gap between software development and hardware constraints, ensuring safe and responsive interactions.</div>
         </div>
       </div>
+
+      <div class="evidence-visuals">
+        <img src="your-vr-image.jpg" alt="VR Simulation Screenshot">
+        <div class="evidence-caption">Screenshot of the VR visual distortion implementation.</div>
+      </div>
       
-      <p class="modal-note">Student note: Provide actual screenshots or snippets of your VR environment in your final submission document.</p>
     </div>
   </div>
 
@@ -474,16 +500,16 @@
           <div class="modal-value">Understanding OSI layers, TCP/IP protocols, and network layering fundamentals</div>
         </div>
         <div class="modal-row">
-          <div class="modal-label">Suggested Evidence</div>
-          <div class="modal-value">Network architecture diagrams, coursework summaries, protocol analysis reports</div>
-        </div>
-        <div class="modal-row">
           <div class="modal-label">Reflection</div>
           <div class="modal-value">This coursework provided the theoretical foundation needed to transition from standard application development into a security-focused role by understanding how data moves across systems.</div>
         </div>
       </div>
+
+      <div class="evidence-visuals">
+        <img src="your-diagram-image.jpg" alt="Network Architecture Diagram">
+        <div class="evidence-caption">Network architecture diagram from coursework.</div>
+      </div>
       
-      <p class="modal-note">Student note: Provide actual PDFs or diagrams from your coursework in your final submission document.</p>
     </div>
   </div>
 
@@ -529,12 +555,9 @@
       // 2. Parallax and Fade for Top Gradient Background
       const scrollY = window.scrollY;
       if (bgGradient) {
-        // Fade out as you scroll down (fully gone by 600px scroll)
         let opacity = 1 - (scrollY / 600);
         if (opacity < 0) opacity = 0;
         bgGradient.style.opacity = opacity;
-        
-        // Move upward slightly for a parallax effect
         bgGradient.style.transform = `translateY(-${scrollY * 0.3}px)`;
       }
     }
