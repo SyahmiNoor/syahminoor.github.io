@@ -235,7 +235,6 @@
     .evidence-gallery .evidence-item:nth-child(3):last-child { grid-column: 1 / -1; }
     .evidence-gallery .evidence-item:nth-child(3):last-child img { height: auto; max-height: 300px; }
 
-
     /* FULL-SCREEN LIGHTBOX OVERLAY */
     .lightbox-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
@@ -310,11 +309,11 @@
       <span style="color: var(--accent); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Individual E-Portfolio (20%)</span>
       <h1>Muhammad Syahmi bin Mohd Noor</h1>
       <p style="font-size: 1.1rem; max-width: 800px; margin-top: 0.75rem;">
-        Information Technology student transitioning foundational skills in C# application development, interactive design, and digital networking into modern, secure software architecture.
+        Information Technology student transitioning foundational skills in full-stack web and C# application development into modern, secure software architecture.
       </p>
       <div style="margin-top: 1.25rem;">
         <span class="tag">Application Security (AppSec) Engineer</span>
-        <span class="tag">C# / Unity</span>
+        <span class="tag">Web Dev / Unity</span>
         <span class="tag">Network Architecture</span>
       </div>
     </section>
@@ -344,6 +343,10 @@
             <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
           </div>
           <div class="skill-item">
+            <div class="skill-info"><span>Web Dev (CSS, PHP, JS, WinSCP)</span><span>75%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+          </div>
+          <div class="skill-item">
             <div class="skill-info"><span>Networking Basics (OSI, TCP/IP)</span><span>75%</span></div>
             <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
           </div>
@@ -354,14 +357,13 @@
         </div>
 
         <div class="card">
-          <h3>Soft Skills</h3>
+          <h3>Soft Skills & Gap Analysis</h3>
           <ul style="color: var(--text-secondary); margin-bottom: 1.5rem; padding-left: 1.2rem; font-size: 0.95rem;">
             <li style="margin-bottom: 0.5rem;"><strong>Teamwork & Communication:</strong> Proven collaboration in digital strategy (Pink Corner project) and public relations for university committees (JPLK).</li>
             <li><strong>Problem Solving:</strong> Iterating on educational designs based on direct user feedback testing (KIAS project).</li>
           </ul>
           
-          <h3>Industry Requirements Comparison</h3>
-          <p style="font-size: 0.95rem; margin-bottom: 0;">While my foundational programming and networking theories are strong, industry standards for an AppSec Engineer require specific, formal knowledge of secure coding practices (such as the OWASP Top 10) and practical familiarity with vulnerability remediation and SAST/DAST tools. This gap dictates my current career development plan.</p>
+          <p style="padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.95rem;"><strong>Industry Gap:</strong> While my programming and web deployment skills are strong, industry standards for an AppSec Engineer require specific, formal knowledge of secure coding practices (such as the OWASP Top 10) and practical familiarity with vulnerability remediation and testing tools.</p>
         </div>
       </div>
     </section>
@@ -374,12 +376,12 @@
             <div class="timeline-dot"></div>
             <span class="timeline-date">Short-Term: Next 6 Months</span>
             <h3>Academic & Tool Mastery</h3>
-            <p>Successfully complete and present my Final Year Project. Dedicate time to mastering essential application testing methodologies, studying OWASP vulnerability remediation, and learning basic <strong>Python</strong> for security automation and scripting.</p>
+            <p>Successfully complete my Final Year Project. Dedicate time to mastering essential application testing methodologies, studying OWASP vulnerability remediation, and learning basic <strong>Python</strong> for security automation.</p>
           </div>
           
           <div class="timeline-item">
             <div class="timeline-dot"></div>
-            <span class="timeline-date">Short-Term: 2 Years</span>
+            <span class="timeline-date">Mid-Term: 2 Years</span>
             <h3>Certification & Initial Placement</h3>
             <p>Obtain foundational industry certifications such as <strong>CompTIA Security+</strong> or introductory web application penetration testing credentials. Secure a junior application security or software development role heavily focused on secure code auditing.</p>
           </div>
@@ -398,6 +400,16 @@
       <h2>Evidence of Learning</h2>
       <div class="grid-3">
         
+        <div class="evidence-card" onclick="openModal('modal-web')">
+          <div class="evidence-icon">💻</div>
+          <div class="evidence-content">
+            <h4>Simple Web Application</h4>
+            <p>A foundational web project demonstrating front-end design and back-end server communication.</p>
+            <div style="margin-bottom: 0.5rem;"><span class="tag">PHP/JS/CSS</span><span class="tag">Web Dev</span></div>
+            <div class="view-prompt">Click to view evidence →</div>
+          </div>
+        </div>
+
         <div class="evidence-card" onclick="openModal('modal-cure')">
           <div class="evidence-icon">🎮</div>
           <div class="evidence-content">
@@ -423,7 +435,7 @@
           <div class="evidence-content">
             <h4>Data Communication</h4>
             <p>Academic coursework detailing the mapping of Data Communication models, OSI layers, and TCP/IP protocol suites.</p>
-            <div style="margin-bottom: 0.5rem;"><span class="tag">Coursework</span><span class="tag">Network Architecture</span></div>
+            <div style="margin-bottom: 0.5rem;"><span class="tag">Coursework</span><span class="tag">Networks</span></div>
             <div class="view-prompt">Click to view evidence →</div>
           </div>
         </div>
@@ -433,21 +445,21 @@
 
     <section id="reflection" class="section reveal">
       <h2>Personal Reflection</h2>
-      <p style="margin-bottom: 2rem;"><strong>Target Dream Company:</strong> [Insert Your Dream Company Here]</p>
+      <p style="margin-bottom: 2rem;"><strong>Target Dream Company:</strong> Carsome (Malaysia)</p>
       
       <div class="qa-box">
         <h4>Why do you want to work for this company?</h4>
-        <p>[Insert why their mission aligns with your interest. Example: "I admire your dedication to building secure educational platforms and your innovative approach to user privacy..."]</p>
+        <p>I deeply admire Carsome's position as Southeast Asia's leading automotive e-commerce platform. Combining my personal interest in automotive technology and vehicle security with my drive to secure large-scale digital applications makes Carsome my ideal technical environment.</p>
       </div>
 
       <div class="qa-box">
         <h4>What value can you bring / Why should we hire you?</h4>
-        <p>I bring a unique hybrid of hands-on application development (Unity/C#) and a strong foundation in network communication. Having built complex applications myself, I understand developer workflows and underlying data structures from the inside out, making me uniquely positioned to secure code efficiently without disrupting the development lifecycle.</p>
+        <p>I bring a hybrid of hands-on application development (CSS/PHP/JS/C#) and a strong foundation in network communication. Having built and deployed web applications and digital interfaces myself, I understand developer workflows from the inside out, making me uniquely positioned to secure code efficiently without disrupting the development lifecycle.</p>
       </div>
 
       <div class="qa-box">
         <h4>What are your strengths and weaknesses?</h4>
-        <p><strong>Strengths:</strong> High adaptability and self-driven learning, evidenced by independently mastering complex visual tools alongside backend logic (Unity C#) to complete full-scale projects.<br><br>
+        <p><strong>Strengths:</strong> High adaptability and self-driven learning, evidenced by independently mastering diverse tools from front-end web deployment to complex backend logic (Unity C#).<br><br>
         <strong>Weaknesses:</strong> I am currently bridging the technical gap between standard software development and enterprise-level application security testing tools. I am actively closing this gap through my self-study and certification timeline outlined in my development plan.</p>
       </div>
     </section>
@@ -457,6 +469,42 @@
   <!-- ============================================== -->
   <!-- MODALS FOR EVIDENCE (WITH IMAGE GALLERY)       -->
   <!-- ============================================== -->
+
+  <!-- MODAL 0: WEB APPLICATION -->
+  <div class="modal-overlay" id="modal-web" onclick="closeModal('modal-web')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeModal('modal-web')">Close</button>
+      <h2>Simple Web Application</h2>
+      <p class="modal-subtitle">A foundational project demonstrating front-end design and back-end integration.</p>
+      
+      <div class="modal-table">
+        <div class="modal-row">
+          <div class="modal-label">Tools Used</div>
+          <div class="modal-value">CSS, PHP, JavaScript, WinSCP</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Skills Demonstrated</div>
+          <div class="modal-value">Full-stack web development, server deployment, FTP file management, front-end styling</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Reflection</div>
+          <div class="modal-value">Building this website gave me an essential understanding of front-end and back-end interactions, which is crucial for identifying web vulnerabilities as an AppSec Engineer.</div>
+        </div>
+      </div>
+
+      <!-- IMAGE GALLERY: Replace SRC with your web images -->
+      <div class="evidence-gallery">
+        <div class="evidence-item">
+          <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=Web+Screenshot+1" alt="Web Application Screenshot" onclick="openLightbox(this.src)">
+          <div class="evidence-caption">Screenshot 1: Website Interface</div>
+        </div>
+        <div class="evidence-item">
+          <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=Web+Screenshot+2" alt="Web Application Screenshot" onclick="openLightbox(this.src)">
+          <div class="evidence-caption">Screenshot 2: Code Snippet / WinSCP Deployment</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- MODAL 1: C.U.R.E. -->
   <div class="modal-overlay" id="modal-cure" onclick="closeModal('modal-cure')">
@@ -480,30 +528,17 @@
         </div>
       </div>
 
-      <!-- IMAGE GALLERY: Example with 4 Images -->
+      <!-- IMAGE GALLERY -->
       <div class="evidence-gallery">
         <div class="evidence-item">
-          <!-- Replace src with your image file -->
           <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=Image+1" alt="CURE Game Screenshot" onclick="openLightbox(this.src)">
           <div class="evidence-caption">Screenshot 1: Core gameplay logic</div>
         </div>
-        
         <div class="evidence-item">
           <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=Image+2" alt="CURE Game Screenshot" onclick="openLightbox(this.src)">
           <div class="evidence-caption">Screenshot 2: Boss fight mechanics</div>
         </div>
-
-        <div class="evidence-item">
-          <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=Image+3" alt="CURE Game Screenshot" onclick="openLightbox(this.src)">
-          <div class="evidence-caption">Screenshot 3: 3D Asset generation</div>
-        </div>
-
-        <div class="evidence-item">
-          <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=Image+4" alt="CURE Game Screenshot" onclick="openLightbox(this.src)">
-          <div class="evidence-caption">Screenshot 4: State management</div>
-        </div>
       </div>
-
     </div>
   </div>
 
@@ -529,19 +564,13 @@
         </div>
       </div>
 
-      <!-- IMAGE GALLERY: Example with 2 Images -->
+      <!-- IMAGE GALLERY -->
       <div class="evidence-gallery">
         <div class="evidence-item">
           <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=VR+Screenshot+1" alt="VR Simulation" onclick="openLightbox(this.src)">
           <div class="evidence-caption">Screenshot of VR distortion effect.</div>
         </div>
-        
-        <div class="evidence-item">
-          <img src="https://via.placeholder.com/600x400/141e33/38bdf8?text=VR+Screenshot+2" alt="VR Simulation" onclick="openLightbox(this.src)">
-          <div class="evidence-caption">Screenshot of the GVR environment setup.</div>
-        </div>
       </div>
-      
     </div>
   </div>
 
@@ -567,14 +596,13 @@
         </div>
       </div>
 
-      <!-- IMAGE GALLERY: Example with 1 Image -->
+      <!-- IMAGE GALLERY -->
       <div class="evidence-gallery">
         <div class="evidence-item">
           <img src="https://via.placeholder.com/800x400/141e33/38bdf8?text=Network+Diagram" alt="Network Architecture Diagram" onclick="openLightbox(this.src)">
           <div class="evidence-caption">Network architecture diagram from coursework.</div>
         </div>
       </div>
-      
     </div>
   </div>
 
