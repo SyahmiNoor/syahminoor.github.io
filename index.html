@@ -160,8 +160,21 @@
     .evidence-icon {
       height: 100px; background: var(--grad-subtle);
       display: flex; align-items: center; justify-content: center;
-      font-size: 2.5rem; border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
+    
+    /* NEW: CSS for Image Icons */
+    .evidence-icon img {
+      height: 50px; /* Constrains the image size perfectly within the 100px box */
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
+      transition: transform 0.3s ease;
+    }
+    .evidence-card:hover .evidence-icon img {
+      transform: scale(1.1); /* Creates a neat zoom effect on hover */
+    }
+
     .evidence-content { padding: 1.25rem; flex-grow: 1; display: flex; flex-direction: column; }
     .evidence-content h4 { margin: 0 0 0.5rem 0; font-size: 1.05rem; }
     .evidence-content p { font-size: 0.85rem; margin-bottom: 1rem; flex-grow: 1; }
@@ -259,6 +272,37 @@
     }
     .lightbox-close:hover { background: var(--accent); border-color: var(--accent); transform: scale(1.1); }
 
+    /* NEW: DREAM COMPANY HIGHLIGHT BOX */
+    .dream-company-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      padding: 1.5rem 2rem;
+      border-radius: 0.5rem;
+      margin-bottom: 2.5rem;
+      display: inline-block;
+      box-shadow: var(--shadow);
+    }
+    .dream-company-box .label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+    .dream-company-box .company-name {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+      line-height: 1.2;
+    }
+
     /* REFLECTION Q&A */
     .qa-box {
       border-left: 3px solid var(--accent);
@@ -279,6 +323,8 @@
       .evidence-gallery { grid-template-columns: 1fr; }
       .evidence-gallery .evidence-item:nth-child(3):last-child { grid-column: auto; }
       .evidence-gallery img { height: auto; }
+      .dream-company-box { width: 100%; display: block; }
+      .dream-company-box .company-name { font-size: 1.8rem; }
     }
   </style>
 </head>
@@ -401,7 +447,9 @@
       <div class="grid-3">
         
         <div class="evidence-card" onclick="openModal('modal-web')">
-          <div class="evidence-icon">💻</div>
+          <div class="evidence-icon">
+            <img src="laptop-icon.png" alt="Web App">
+          </div>
           <div class="evidence-content">
             <h4>Simple Web Application</h4>
             <p>A foundational web project demonstrating front-end design and back-end server communication.</p>
@@ -411,7 +459,9 @@
         </div>
 
         <div class="evidence-card" onclick="openModal('modal-cure')">
-          <div class="evidence-icon">🎮</div>
+          <div class="evidence-icon">
+            <img src="controller-icon.png" alt="CURE Game">
+          </div>
           <div class="evidence-content">
             <h4>C.U.R.E.</h4>
             <p>A 3D game featuring complex object-oriented logic, state management, and interaction scripting.</p>
@@ -421,7 +471,9 @@
         </div>
         
         <div class="evidence-card" onclick="openModal('modal-vr')">
-          <div class="evidence-icon">🥽</div>
+          <div class="evidence-icon">
+            <img src="vr-icon.png" alt="VR Simulation">
+          </div>
           <div class="evidence-content">
             <h4>SchizoMind VR</h4>
             <p>An immersive educational VR simulation utilizing Google VR toolkits, demonstrating software/hardware bridge capabilities.</p>
@@ -435,7 +487,12 @@
 
     <section id="reflection" class="section reveal">
       <h2>Personal Reflection</h2>
-      <p style="margin-bottom: 2rem;"><strong>Target Dream Company:</strong> Carsome (Malaysia)</p>
+      
+      <!-- HIGHLIGHT BOX -->
+      <div class="dream-company-box">
+        <span class="label">Target Dream Company</span>
+        <h3 class="company-name">Carsome (Malaysia)</h3>
+      </div>
       
       <div class="qa-box">
         <h4>Why do you want to work for this company?</h4>
@@ -482,7 +539,6 @@
         </div>
       </div>
 
-      <!-- IMAGE GALLERY: Replace SRC with your web images -->
       <div class="evidence-gallery">
         <div class="evidence-item">
           <img src="all-pages.png" alt="Web Application Screenshot" onclick="openLightbox(this.src)">
@@ -518,7 +574,6 @@
         </div>
       </div>
 
-      <!-- IMAGE GALLERY -->
       <div class="evidence-gallery">
         <div class="evidence-item">
           <img src="Game_code.png" onclick="openLightbox(this.src)">
@@ -554,7 +609,6 @@
         </div>
       </div>
 
-      <!-- IMAGE GALLERY -->
       <div class="evidence-gallery">
         <div class="evidence-item">
           <img src="Face_distortion.png" alt="VR Simulation" onclick="openLightbox(this.src)">
