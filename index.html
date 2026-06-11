@@ -218,7 +218,7 @@
       display: flex; flex-direction: column; gap: 0.5rem;
     }
     .evidence-gallery img {
-      width: 100%; height: 180px; /* Uniform smaller size inside modal */
+      width: 100%; height: 180px;
       object-fit: cover; border-radius: 8px; border: 1px solid var(--border);
       cursor: zoom-in; transition: transform 0.2s, border-color 0.2s;
     }
@@ -230,12 +230,8 @@
       text-align: center; font-style: italic;
     }
     
-    /* Layout Rules for different image counts */
-    /* If exactly 1 image: Span full width and allow natural height */
     .evidence-gallery .evidence-item:only-child { grid-column: 1 / -1; }
     .evidence-gallery .evidence-item:only-child img { height: auto; max-height: 400px; }
-    
-    /* If exactly 3 images: Make the 3rd image span the bottom nicely */
     .evidence-gallery .evidence-item:nth-child(3):last-child { grid-column: 1 / -1; }
     .evidence-gallery .evidence-item:nth-child(3):last-child img { height: auto; max-height: 300px; }
 
@@ -317,7 +313,7 @@
         Information Technology student transitioning foundational skills in C# application development, interactive design, and digital networking into modern, secure software architecture.
       </p>
       <div style="margin-top: 1.25rem;">
-        <span class="tag">Security-Focused Software Developer</span>
+        <span class="tag">Application Security (AppSec) Engineer</span>
         <span class="tag">C# / Unity</span>
         <span class="tag">Network Architecture</span>
       </div>
@@ -328,12 +324,12 @@
       <div class="grid-2">
         <div class="card">
           <h3>Target Role</h3>
-          <p style="color: var(--text-primary); font-weight: 500;">Security-Focused Software Developer</p>
-          <p><strong>Responsibilities:</strong> Designing, building, and testing software with security integrated throughout the development lifecycle (DevSecOps). This involves writing secure logic, preventing vulnerabilities natively within applications, and ensuring secure data communication across network layers.</p>
+          <p style="color: var(--text-primary); font-weight: 500;">Application Security (AppSec) Engineer</p>
+          <p><strong>Responsibilities:</strong> Securing the software development lifecycle (SDLC) by identifying vulnerabilities in code, conducting threat modeling, performing static and dynamic application security testing (SAST/DAST), and guiding development teams on secure coding practices.</p>
         </div>
         <div class="card">
           <h3>Relevance to Modern Cybersecurity</h3>
-          <p>The traditional model of relying solely on firewalls and adding security after an application is built is obsolete. Modern cyber threats target the application layer directly. The industry requires developers who understand network architecture (OSI/TCP models) and can prevent exploits natively within the code before deployment.</p>
+          <p>The traditional model of relying solely on perimeter defenses is obsolete, as modern cyber threats frequently target the application layer directly. The industry increasingly relies on AppSec Engineers to bridge the gap between development and security, proactively neutralizing exploits within the codebase before deployment.</p>
         </div>
       </div>
     </section>
@@ -365,7 +361,7 @@
           </ul>
           
           <h3>Industry Requirements Comparison</h3>
-          <p style="font-size: 0.95rem; margin-bottom: 0;">While my foundational programming and networking theories are strong, industry standards for a Security-Focused Developer require specific, formal knowledge of secure coding practices (like OWASP Top 10) and practical familiarity with penetration testing tools. This gap dictates my current career development plan.</p>
+          <p style="font-size: 0.95rem; margin-bottom: 0;">While my foundational programming and networking theories are strong, industry standards for an AppSec Engineer require specific, formal knowledge of secure coding practices (such as the OWASP Top 10) and practical familiarity with vulnerability remediation and SAST/DAST tools. This gap dictates my current career development plan.</p>
         </div>
       </div>
     </section>
@@ -378,21 +374,21 @@
             <div class="timeline-dot"></div>
             <span class="timeline-date">Short-Term: Next 6 Months</span>
             <h3>Academic & Tool Mastery</h3>
-            <p>Successfully complete and present my Final Year Project. Dedicate time to mastering essential network analysis tools like <strong>Wireshark</strong> to monitor traffic, and learn basic <strong>Python</strong> for security automation and scripting.</p>
+            <p>Successfully complete and present my Final Year Project. Dedicate time to mastering essential application testing methodologies, studying OWASP vulnerability remediation, and learning basic <strong>Python</strong> for security automation and scripting.</p>
           </div>
           
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <span class="timeline-date">Short-Term: 2 Years</span>
             <h3>Certification & Initial Placement</h3>
-            <p>Obtain foundational industry certifications such as <strong>CompTIA Security+</strong> to validate my knowledge. Secure a junior software development role focusing on building secure application architectures.</p>
+            <p>Obtain foundational industry certifications such as <strong>CompTIA Security+</strong> or introductory web application penetration testing credentials. Secure a junior application security or software development role heavily focused on secure code auditing.</p>
           </div>
           
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <span class="timeline-date">Long-Term: 5 Years</span>
             <h3>Specialization & Advanced Architecture</h3>
-            <p>Transition into a mid-level Security-Focused Software Developer or DevSecOps Engineer role. Pursue advanced cloud security certifications (e.g., <strong>AWS Certified Security - Specialty</strong>) to handle enterprise-level infrastructure.</p>
+            <p>Transition into a mid-level Application Security Engineer role. Pursue advanced software security certifications (e.g., <strong>CSSLP</strong> or <strong>OSWE</strong>) to architect and secure enterprise-level application infrastructures.</p>
           </div>
         </div>
       </div>
@@ -446,13 +442,13 @@
 
       <div class="qa-box">
         <h4>What value can you bring / Why should we hire you?</h4>
-        <p>I bring a unique hybrid of interactive media development (Unity/VR) and a strong foundation in network communication. I understand not just how to build engaging applications that users love, but the underlying data structures and network layers that power them securely.</p>
+        <p>I bring a unique hybrid of hands-on application development (Unity/C#) and a strong foundation in network communication. Having built complex applications myself, I understand developer workflows and underlying data structures from the inside out, making me uniquely positioned to secure code efficiently without disrupting the development lifecycle.</p>
       </div>
 
       <div class="qa-box">
         <h4>What are your strengths and weaknesses?</h4>
         <p><strong>Strengths:</strong> High adaptability and self-driven learning, evidenced by independently mastering complex visual tools alongside backend logic (Unity C#) to complete full-scale projects.<br><br>
-        <strong>Weaknesses:</strong> I am currently bridging the technical gap between standard software development and enterprise-level network security tools. I am actively closing this gap through my self-study and certification timeline outlined in my development plan.</p>
+        <strong>Weaknesses:</strong> I am currently bridging the technical gap between standard software development and enterprise-level application security testing tools. I am actively closing this gap through my self-study and certification timeline outlined in my development plan.</p>
       </div>
     </section>
 
