@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Security Developer Portfolio</title>
+  <title>Security Developer Terminal</title>
   <style>
     :root {
-      --bg-dark: #070b14;
-      --bg-panel: rgba(16, 25, 43, 0.7);
-      --bg-sidebar: #04070c;
+      --bg-base: #03070e;
+      --bg-panel: rgba(10, 15, 28, 0.85);
+      --bg-sidebar: #020408;
       --accent-main: #00ffcc;
+      --accent-dim: rgba(0, 255, 204, 0.3);
       --accent-sec: #7b61ff;
-      --text-bright: #f8faff;
-      --text-dim: #94a3b8;
-      --border: rgba(0, 255, 204, 0.15);
-      --glow: 0 0 20px rgba(0, 255, 204, 0.2);
+      --accent-warn: #ffae00;
+      --text-bright: #ffffff;
+      --text-dim: #8b9bb4;
+      --border: rgba(0, 255, 204, 0.2);
+      --glow: 0 0 15px rgba(0, 255, 204, 0.15);
+      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     }
 
     * { box-sizing: border-box; }
@@ -23,133 +26,173 @@
     body {
       margin: 0;
       font-family: 'Inter', system-ui, sans-serif;
-      background-color: var(--bg-dark);
-      /* Cool network dot pattern */
-      background-image: radial-gradient(var(--border) 1px, transparent 1px);
-      background-size: 30px 30px;
+      background-color: var(--bg-base);
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(123, 97, 255, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(0, 255, 204, 0.08), transparent 25%),
+        linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
       color: var(--text-bright);
       display: flex;
       min-height: 100vh;
     }
 
-    /* TYPOGRAPHY */
-    h1, h2, h3 { font-weight: 700; margin-top: 0; }
-    h1 { font-size: 3rem; letter-spacing: -1px; }
-    h2 { font-size: 2rem; color: var(--accent-main); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 25px;}
-    p { color: var(--text-dim); line-height: 1.7; }
-    .mono { font-family: 'Courier New', Courier, monospace; letter-spacing: 1px; }
+    .mono { font-family: 'Courier New', Courier, monospace; letter-spacing: 0.5px; }
 
-    /* SIDEBAR DASHBOARD */
+    /* --- SIDEBAR --- */
     .sidebar {
-      width: 220px; /* Slimmed down from 280px */
+      width: 240px;
       background: var(--bg-sidebar);
       border-right: 1px solid var(--border);
       position: fixed;
       height: 100vh;
-      padding: 40px 15px; /* Reduced side padding */
+      padding: 30px 15px;
       display: flex;
       flex-direction: column;
       z-index: 100;
+      box-shadow: 5px 0 30px rgba(0,0,0,0.5);
     }
-    .logo-area { text-align: center; margin-bottom: 40px; }
+    .logo-area { text-align: center; margin-bottom: 30px; position: relative; }
+    .logo-area::after { content: ''; display: block; width: 100%; height: 1px; background: var(--border); margin-top: 20px; }
     .logo-icon {
-      width: 60px; height: 60px;
-      background: linear-gradient(45deg, var(--accent-main), var(--accent-sec));
-      border-radius: 12px; margin: 0 auto 15px;
+      width: 50px; height: 50px;
+      background: linear-gradient(135deg, var(--accent-main), var(--accent-sec));
+      border-radius: 10px; margin: 0 auto 10px;
       display: grid; place-items: center;
-      font-size: 1.5rem; font-weight: 900; color: #000;
-      box-shadow: var(--glow);
+      font-size: 1.2rem; font-weight: 900; color: #000;
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
     }
-    .nav-links { display: flex; flex-direction: column; gap: 10px; }
+    .nav-links { display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
     .nav-links a {
-      color: var(--text-dim); text-decoration: none; padding: 12px 10px;
-      border-radius: 8px; transition: all 0.3s;
-      border-left: 3px solid transparent;
-      font-size: 0.9rem; font-weight: 500;
+      color: var(--text-dim); text-decoration: none; padding: 10px 12px;
+      border-radius: 6px; transition: all 0.2s;
+      border-left: 2px solid transparent;
+      font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
     }
     .nav-links a:hover {
-      background: rgba(0, 255, 204, 0.05); color: var(--text-bright);
-      border-left: 3px solid var(--accent-main);
+      background: rgba(0, 255, 204, 0.05); color: var(--accent-main);
+      border-left: 2px solid var(--accent-main);
+    }
+    .sidebar-footer {
+      font-size: 0.7rem; color: var(--text-dim);
+      border-top: 1px solid var(--border); padding-top: 15px;
     }
 
-    /* MAIN CONTENT AREA */
+    /* --- TOP TELEMETRY BAR --- */
+    .top-bar {
+      position: fixed; top: 0; left: 240px; right: 0; height: 40px;
+      background: rgba(2, 4, 8, 0.9); border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 30px; z-index: 90; backdrop-filter: blur(5px);
+      font-size: 0.75rem; color: var(--accent-main);
+    }
+
+    /* --- MAIN CONTENT --- */
     .main-content {
-      margin-left: 220px; /* Adjusted to match new sidebar width */
-      padding: 60px 5%;
-      width: calc(100% - 220px); /* Adjusted to match new sidebar width */
+      margin-left: 240px; margin-top: 40px;
+      padding: 40px 4%; width: calc(100% - 240px);
     }
-    .section { margin-bottom: 100px; scroll-margin-top: 60px; }
+    .section { margin-bottom: 80px; scroll-margin-top: 80px; }
+    
+    h2 { 
+      font-size: 1.5rem; color: var(--text-bright); 
+      display: flex; align-items: center; gap: 15px;
+      margin-bottom: 30px; 
+    }
+    h2::before { content: '>'; color: var(--accent-main); font-weight: 900; }
+    h2::after { content: ''; flex-grow: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
 
-    /* UI COMPONENTS */
+    /* --- PANELS & WIDGETS --- */
     .panel {
-      background: var(--bg-panel);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 30px;
-    }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-
-    .tag {
-      display: inline-block; padding: 6px 12px;
-      background: rgba(123, 97, 255, 0.15); border: 1px solid var(--accent-sec);
-      color: #b0a1ff; border-radius: 4px; font-size: 0.8rem;
-      margin: 0 5px 10px 0;
-    }
-
-    /* HERO SECTION */
-    .hero { display: flex; flex-direction: column; justify-content: center; min-height: 80vh; }
-    .hero-status { color: var(--accent-main); font-size: 0.9rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;}
-    .hero-status::before { content: ''; display: block; width: 10px; height: 10px; background: var(--accent-main); border-radius: 50%; box-shadow: 0 0 10px var(--accent-main); }
-
-    /* SKILLS BARS */
-    .skill-box { margin-bottom: 20px; }
-    .skill-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; }
-    .skill-track { height: 6px; background: #1a2333; border-radius: 3px; overflow: hidden; }
-    .skill-fill { height: 100%; background: var(--accent-main); box-shadow: var(--glow); width: 0; transition: width 1.5s ease-out; }
-
-    /* TIMELINE */
-    .timeline { border-left: 2px solid var(--border); padding-left: 30px; margin-left: 10px; }
-    .time-node { position: relative; margin-bottom: 35px; }
-    .time-node::before {
-      content: ''; position: absolute; left: -37px; top: 5px;
-      width: 12px; height: 12px; border-radius: 50%;
-      background: var(--bg-dark); border: 2px solid var(--accent-main);
-    }
-    .time-node h3 { color: var(--text-bright); margin-bottom: 5px; }
-
-    /* EVIDENCE CARDS */
-    .card {
       background: var(--bg-panel); border: 1px solid var(--border);
-      border-radius: 12px; overflow: hidden; cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
+      border-radius: 8px; padding: 25px; position: relative;
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(10px);
     }
-    .card:hover { transform: translateY(-5px); box-shadow: var(--glow); border-color: var(--accent-main); }
-    .card-img { height: 140px; background: rgba(0,255,204,0.05); display: grid; place-items: center; font-size: 3rem; border-bottom: 1px solid var(--border); }
-    .card-body { padding: 20px; }
+    /* Sci-fi corner cut effect */
+    .panel::before {
+      content: ''; position: absolute; top: -1px; left: -1px;
+      width: 20px; height: 20px; border-top: 2px solid var(--accent-main); border-left: 2px solid var(--accent-main);
+    }
+    .panel::after {
+      content: ''; position: absolute; bottom: -1px; right: -1px;
+      width: 20px; height: 20px; border-bottom: 2px solid var(--accent-main); border-right: 2px solid var(--accent-main);
+    }
 
-    /* TERMINAL ACCORDION (Reflection) */
-    .terminal-prompt {
-      background: rgba(0,0,0,0.5); border: 1px solid var(--border);
-      border-radius: 8px; margin-bottom: 15px; overflow: hidden;
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    
+    /* --- HERO DASHBOARD --- */
+    .hero-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; align-items: stretch; }
+    .hero-title { font-size: 2.5rem; margin: 0 0 10px 0; font-weight: 800; line-height: 1.1; }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0, 255, 204, 0.1); border: 1px solid var(--accent-main);
+      padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; margin-bottom: 20px; color: var(--accent-main);
     }
-    .terminal-header {
-      padding: 15px 20px; cursor: pointer; display: flex; align-items: center; gap: 10px;
-      color: var(--accent-main); font-weight: 600; background: rgba(255,255,255,0.02);
+    .status-badge .dot { width: 8px; height: 8px; background: var(--accent-main); border-radius: 50%; box-shadow: 0 0 8px var(--accent-main); animation: pulse 2s infinite; }
+    
+    .stats-box { background: rgba(0,0,0,0.4); border: 1px dashed var(--border); padding: 15px; border-radius: 6px; }
+    .stat-row { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px; }
+    .stat-row:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+    .stat-val { color: var(--accent-main); font-weight: bold; }
+
+    /* --- SKILLS METRICS --- */
+    .skill-list { list-style: none; padding: 0; margin: 0; }
+    .skill-list li { margin-bottom: 15px; }
+    .skill-head { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px; color: var(--text-bright); }
+    .bar-bg { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; position: relative; }
+    .bar-fill { height: 100%; background: var(--accent-main); box-shadow: 0 0 10px var(--accent-main); position: absolute; left: 0; top: 0; }
+    
+    .protocol-tag {
+      display: inline-block; padding: 4px 10px; background: rgba(123, 97, 255, 0.1);
+      border: 1px solid var(--accent-sec); color: #c4b5fd; font-size: 0.75rem;
+      margin: 0 5px 5px 0; border-radius: 4px;
     }
-    .terminal-body { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease; color: var(--text-dim); }
-    .terminal-prompt.open .terminal-body { padding: 20px; max-height: 500px; border-top: 1px solid rgba(255,255,255,0.05); }
+
+    /* --- TIMELINE --- */
+    .timeline { border-left: 2px solid var(--accent-dim); padding-left: 25px; margin-left: 10px; }
+    .time-node { position: relative; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 15px; border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; }
+    .time-node::before {
+      content: ''; position: absolute; left: -32px; top: 20px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--bg-base); border: 2px solid var(--accent-main);
+      box-shadow: 0 0 10px var(--accent-main);
+    }
+    .time-node h3 { color: var(--accent-main); margin: 0 0 5px 0; font-size: 1rem; }
+    .time-node p { margin: 0; font-size: 0.9rem; color: var(--text-dim); }
+
+    /* --- EVIDENCE CARDS --- */
+    .card { background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: 0.3s; }
+    .card:hover { border-color: var(--accent-main); transform: translateY(-3px); box-shadow: 0 5px 20px rgba(0,255,204,0.1); }
+    .card-img { height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; background: repeating-linear-gradient(45deg, rgba(0,255,204,0.02), rgba(0,255,204,0.02) 10px, transparent 10px, transparent 20px); border-bottom: 1px solid var(--border); }
+    .card-body { padding: 15px; }
+    .card-body h3 { margin: 0 0 5px 0; font-size: 1.1rem; }
+    .card-body p { margin: 0 0 15px 0; font-size: 0.8rem; color: var(--text-dim); }
+
+    /* --- TERMINAL (REFLECTION) --- */
+    .terminal-window {
+      background: #000; border: 1px solid #333; border-radius: 8px; overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    }
+    .term-header {
+      background: #111; padding: 10px 15px; display: flex; gap: 8px;
+      border-bottom: 1px solid #333;
+    }
+    .term-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .term-body { padding: 20px; color: #a9b7c6; font-size: 0.9rem; line-height: 1.6; }
+    .prompt-line { color: var(--accent-main); font-weight: bold; margin-top: 15px; margin-bottom: 5px;}
+    .response-line { padding-left: 15px; border-left: 2px solid #333; margin-bottom: 20px; }
+
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
     /* RESPONSIVE */
-    @media (max-width: 900px) {
-      body { flex-direction: column; }
-      .sidebar { width: 100%; height: auto; position: static; padding: 20px; border-right: none; border-bottom: 1px solid var(--border); flex-direction: row; align-items: center; justify-content: space-between;}
-      .logo-area { margin-bottom: 0; display: flex; align-items: center; gap: 15px; }
-      .logo-icon { margin: 0; width: 40px; height: 40px; font-size: 1rem; }
-      .nav-links { display: none; }
-      .main-content { margin-left: 0; width: 100%; padding: 40px 20px; }
-      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    @media (max-width: 1000px) {
+      .hero-grid, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .sidebar { display: none; } /* Simplified for mobile preview */
+      .top-bar { left: 0; }
+      .main-content { margin-left: 0; width: 100%; padding: 60px 5% 40px; }
     }
   </style>
 </head>
@@ -157,170 +200,203 @@
 
   <aside class="sidebar">
     <div class="logo-area">
-      <div class="logo-icon">CS</div>
-      <div style="font-weight: 700; letter-spacing: 1px;">CSA30203</div>
-      <div class="mono" style="font-size: 0.75rem; color: var(--text-dim); margin-top: 5px;">SYS_PORTFOLIO_v1</div>
+      <div class="logo-icon">MS</div>
+      <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-bright);">SYAHMI.SYS</div>
+      <div class="mono" style="font-size: 0.7rem; color: var(--accent-main); margin-top: 5px;">CSA30203_PORTFOLIO</div>
     </div>
     <nav class="nav-links">
-      <a href="#hero">00 // INIT_PROFILE</a>
-      <a href="#career">01 // CAREER_TARGET</a>
-      <a href="#skills">02 // SKILL_MATRIX</a>
-      <a href="#timeline">03 // DEV_PLAN</a>
-      <a href="#evidence">04 // EVIDENCE_LOG</a>
-      <a href="#reflection">05 // REFLECTION</a>
+      <a href="#hero">01. Profile_Init</a>
+      <a href="#career">02. Career_Target</a>
+      <a href="#skills">03. Skill_Matrix</a>
+      <a href="#timeline">04. Dev_Roadmap</a>
+      <a href="#evidence">05. Data_Evidence</a>
+      <a href="#reflection">06. System_Log</a>
     </nav>
+    <div class="sidebar-footer mono">
+      <div style="margin-bottom: 5px;">> CONNECTION: ESTABLISHED</div>
+      <div style="margin-bottom: 5px;">> ENCRYPTION: RSA-2048</div>
+      <div style="color: var(--accent-main)">> UPTIME: 99.9%</div>
+    </div>
   </aside>
+
+  <div class="top-bar mono">
+    <div>NODE_LOC: KOTA BHARU, KELANTAN</div>
+    <div>SYS_TIME: <span id="clock">10:42:01</span> // NETWORK_SECURE</div>
+  </div>
 
   <main class="main-content">
     
-    <section id="hero" class="section hero">
-      <div class="hero-status mono">SYSTEM ONLINE // STATUS: SECURE</div>
-      <h1>Muhammad Syahmi bin Mohd Noor</h1>
-      <p style="font-size: 1.2rem; max-width: 700px; margin-bottom: 30px;">
-        Final-year computer science student transitioning established skills in C# application development, VR simulation, and digital networking into modern network security architecture.
-      </p>
-      <div>
-        <span class="tag mono">UNITY/C#</span>
-        <span class="tag mono">DEV_SEC_OPS</span>
-        <span class="tag mono">DATA_COMMS</span>
+    <section id="hero" class="section">
+      <div class="hero-grid">
+        <div class="panel">
+          <div class="status-badge mono"><div class="dot"></div> CLEARANCE LEVEL: FINAL YEAR ADMIN</div>
+          <h1 class="hero-title">Muhammad Syahmi</h1>
+          <p style="font-size: 1.1rem; color: var(--text-dim); margin-bottom: 25px;">
+            Computer science specialist bridging the gap between interactive digital environments (Unity/VR) and robust, secure network architecture.
+          </p>
+          <div>
+            <span class="protocol-tag mono">DEV_SEC_OPS</span>
+            <span class="protocol-tag mono">C#_ARCHITECTURE</span>
+            <span class="protocol-tag mono">DATA_COMMS</span>
+          </div>
+        </div>
+        
+        <div class="panel stats-box mono">
+          <div style="color: var(--text-bright); margin-bottom: 15px; font-weight: bold; font-size: 0.9rem;">> SYSTEM_OVERVIEW</div>
+          <div class="stat-row"><span>Primary Framework</span><span class="stat-val">.NET / Unity 3D</span></div>
+          <div class="stat-row"><span>Security Focus</span><span class="stat-val">App Layer / Net Layer</span></div>
+          <div class="stat-row"><span>Current Directive</span><span class="stat-val">FYP Completion</span></div>
+          <div class="stat-row"><span>Threat Level</span><span style="color: #00ffcc;">LOW</span></div>
+          <div class="stat-row"><span>Comm Status</span><span class="stat-val">JPLK Active</span></div>
+        </div>
       </div>
     </section>
 
     <section id="career" class="section">
-      <h2 class="mono">01 // CAREER EXPLORATION</h2>
+      <h2 class="mono">TARGET_DIRECTIVE: EXPLORATION</h2>
       <div class="grid-2">
         <div class="panel">
-          <h3>Target Role: Security-Focused Software Developer</h3>
-          <p><strong>Responsibilities:</strong> Designing, building, and testing software with security integrated from the ground up (DevSecOps). This involves writing secure C# logic, preventing vulnerabilities natively within applications, and ensuring secure data communication across network layers.</p>
+          <h3 style="color: var(--text-bright); margin-top: 0;">Role: Security-Focused Software Developer</h3>
+          <p style="font-size: 0.9rem;"><strong>Execution Parameters:</strong> Designing, compiling, and deploying software with security integrated from the ground up. This involves writing native secure C# logic, preventing vulnerabilities within complex applications, and structuring secure data communication across network topologies.</p>
         </div>
         <div class="panel">
-          <h3>Cybersecurity Relevance</h3>
-          <p>The traditional model of adding security <em>after</em> an app is built is obsolete. Modern cyber threats target application layers directly. The industry requires developers who understand network architecture (OSI models) and can prevent exploits natively within the code before deployment.</p>
+          <h3 style="color: var(--text-bright); margin-top: 0;">Cybersecurity Relevance</h3>
+          <p style="font-size: 0.9rem;">Traditional perimeter-only security is obsolete. Modern threats bypass firewalls by exploiting application layers directly. The industry urgently requires developers who understand OSI models and can sanitize inputs and secure authentication natively within the codebase.</p>
         </div>
       </div>
     </section>
 
     <section id="skills" class="section">
-      <h2 class="mono">02 // PERSONAL SKILLS ASSESSMENT</h2>
+      <h2 class="mono">SKILL_MATRIX_ASSESSMENT</h2>
       <div class="grid-2">
         <div class="panel">
-          <h3 style="margin-bottom: 25px;">Current Technical Specs</h3>
-          <div class="skill-box">
-            <div class="skill-label"><span class="mono">C# & Unity Engine</span><span>85%</span></div>
-            <div class="skill-track"><div class="skill-fill" style="width: 85%;"></div></div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-label"><span class="mono">Networking (OSI & TCP/IP)</span><span>75%</span></div>
-            <div class="skill-track"><div class="skill-fill" style="width: 75%;"></div></div>
-          </div>
-          <div class="skill-box">
-            <div class="skill-label"><span class="mono">Interactive Digital Design</span><span>80%</span></div>
-            <div class="skill-track"><div class="skill-fill" style="width: 80%;"></div></div>
-          </div>
+          <h3 style="margin-top: 0; color: var(--accent-main); font-size: 0.9rem;" class="mono">> CORE_COMPUTING_STACK</h3>
+          <ul class="skill-list">
+            <li>
+              <div class="skill-head"><span>C# & Unity Engine</span><span class="mono">85%</span></div>
+              <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
+            </li>
+            <li>
+              <div class="skill-head"><span>Network Protocols (OSI, TCP/IP)</span><span class="mono">75%</span></div>
+              <div class="bar-bg"><div class="bar-fill" style="width: 75%;"></div></div>
+            </li>
+            <li>
+              <div class="skill-head"><span>3D Modeling (Maya, Blender)</span><span class="mono">80%</span></div>
+              <div class="bar-bg"><div class="bar-fill" style="width: 80%;"></div></div>
+            </li>
+          </ul>
         </div>
         <div class="panel">
-          <h3 style="margin-bottom: 25px;">Soft Skills & Industry Gap</h3>
-          <p><strong>Team & Comms:</strong> Proven collaboration in digital strategy (Pink Corner project) and social media management for university committees.</p>
-          <p><strong>Problem Solving:</strong> Iterating on educational designs based on user feedback (KIAS project).</p>
-          <div style="border-top: 1px dashed var(--border); margin-top: 20px; padding-top: 20px;">
-            <strong style="color: var(--accent-sec);">> Gap Analysis:</strong>
-            <p style="font-size: 0.9rem; margin-top: 10px;">While foundational programming is strong, industry standards require formal knowledge of secure coding (OWASP) and penetration tools, which dictates my development plan.</p>
+          <h3 style="margin-top: 0; color: var(--accent-main); font-size: 0.9rem;" class="mono">> SOFT_SKILLS & PROTOCOLS</h3>
+          <div style="margin-bottom: 20px;">
+            <span class="protocol-tag">Team Collaboration (Pink Corner)</span>
+            <span class="protocol-tag">Public Comms (JPLK)</span>
+            <span class="protocol-tag">Iterative Feedback Testing</span>
+            <span class="protocol-tag">Complex Troubleshooting</span>
+          </div>
+          <div style="background: rgba(255, 174, 0, 0.1); border-left: 3px solid var(--accent-warn); padding: 10px 15px; font-size: 0.85rem; color: #e2e8f0;">
+            <strong style="color: var(--accent-warn); display: block; margin-bottom: 5px;" class="mono">! GAP_ANALYSIS DETECTED</strong>
+            Foundational programming and networking verified. Industry-standard secure coding practices (OWASP Top 10) and penetration testing execution require further protocol integration (See Dev_Roadmap).
           </div>
         </div>
       </div>
     </section>
 
     <section id="timeline" class="section">
-      <h2 class="mono">03 // CAREER DEVELOPMENT PLAN</h2>
+      <h2 class="mono">DEVELOPMENT_ROADMAP</h2>
       <div class="panel">
         <div class="timeline">
           <div class="time-node">
-            <h3>Short-Term: Next 6 Months</h3>
-            <p>Complete FYP successfully. Master essential network analysis tools like <strong>Wireshark</strong> to monitor traffic, and learn <strong>Python</strong> for security automation scripting.</p>
+            <h3 class="mono">T+6 MONTHS (SHORT TERM)</h3>
+            <p>Successful deployment of Final Year Project. Integration of network analysis tools (<strong>Wireshark</strong>) into daily workflow. Initiation of <strong>Python</strong> syntax for automated security scripting.</p>
           </div>
           <div class="time-node">
-            <h3>Mid-Term: 2 Years</h3>
-            <p>Obtain foundational security certifications such as <strong>CompTIA Security+</strong>. Secure a junior software development role focusing on building secure application architectures.</p>
+            <h3 class="mono">T+2 YEARS (MID TERM)</h3>
+            <p>Acquisition of baseline security clearance (<strong>CompTIA Security+</strong>). Integration into a commercial enterprise as a Junior Software Developer with a mandate to build secure application architectures.</p>
           </div>
           <div class="time-node">
-            <h3>Long-Term: 5 Years</h3>
-            <p>Transition into a mid-level Security-Focused Software Developer or DevSecOps Engineer. Potentially pursue advanced cloud security certifications like <strong>AWS Certified Security</strong>.</p>
+            <h3 class="mono">T+5 YEARS (LONG TERM)</h3>
+            <p>Promotion to Mid-Level Security-Focused Developer / DevSecOps Engineer. Acquisition of advanced cloud architecture protocols (e.g., <strong>AWS Certified Security</strong>).</p>
           </div>
         </div>
       </div>
     </section>
 
     <section id="evidence" class="section">
-      <h2 class="mono">04 // EVIDENCE OF LEARNING</h2>
+      <h2 class="mono">DATA_EVIDENCE_LOG</h2>
       <div class="grid-3">
         <div class="card">
           <div class="card-img">🎮</div>
           <div class="card-body">
             <h3>C.U.R.E. Prototype</h3>
-            <p style="font-size: 0.85rem;">3D game prototype featuring complex object-oriented logic and C# programming.</p>
-            <span class="tag mono">Unity</span><span class="tag mono">C#</span>
+            <p>Object-oriented 3D game prototype requiring complex C# logic, state management, and interaction scripting.</p>
+            <span class="protocol-tag mono">UNITY_C#</span>
           </div>
         </div>
         <div class="card">
           <div class="card-img">🥽</div>
           <div class="card-body">
             <h3>SchizoMind VR</h3>
-            <p style="font-size: 0.85rem;">Educational VR simulation built with Google VR toolkits. Demonstrates interactive scripting.</p>
-            <span class="tag mono">VR</span><span class="tag mono">Scripting</span>
+            <p>Immersive educational VR simulation utilizing Google VR toolkits. Demonstrates hardware/software bridge capabilities.</p>
+            <span class="protocol-tag mono">GVR_SDK</span>
           </div>
         </div>
         <div class="card">
           <div class="card-img">🌐</div>
           <div class="card-body">
-            <h3>Data Comm Coursework</h3>
-            <p style="font-size: 0.85rem;">Academic mapping of OSI models, TCP/IP protocol suites, and network layers (ITF33603).</p>
-            <span class="tag mono">Networking</span>
+            <h3>Network Mapping (ITF33603)</h3>
+            <p>Academic breakdown and mapping of Data Communication models, including deep dives into OSI layers and TCP/IP suites.</p>
+            <span class="protocol-tag mono">NET_DATA</span>
           </div>
         </div>
       </div>
     </section>
 
     <section id="reflection" class="section">
-      <h2 class="mono">05 // PERSONAL REFLECTION</h2>
-      <p style="margin-bottom: 20px;">Target Company: <strong>[Your Dream Company]</strong></p>
-      
-      <div class="terminal-prompt open">
-        <div class="terminal-header" onclick="toggleTerminal(this)">
-          <span class="mono">>_ Why do you want to work for this company?</span>
+      <h2 class="mono">SYSTEM_LOG: REFLECTION</h2>
+      <div class="terminal-window">
+        <div class="term-header">
+          <div class="term-dot" style="background: #ff5f56;"></div>
+          <div class="term-dot" style="background: #ffbd2e;"></div>
+          <div class="term-dot" style="background: #27c93f;"></div>
+          <div class="mono" style="color: #666; font-size: 0.8rem; margin-left: 10px;">bash - target_company.sh</div>
         </div>
-        <div class="terminal-body">
-          <p>[Insert why their mission aligns with your interest in secure, interactive software. e.g., "I admire your dedication to building secure educational platforms..."]</p>
-        </div>
-      </div>
+        <div class="term-body mono">
+          <div><span style="color: #27c93f;">user@syahmi-sys</span><span style="color: #fff;">:</span><span style="color: #4db8ff;">~/interview</span>$ ./run_analysis.sh --target="[Dream Company]"</div>
+          
+          <div class="prompt-line">> Query: Why do you want to work for this company?</div>
+          <div class="response-line">
+            [Insert why their mission aligns with your interest in secure, interactive software. e.g., "I admire your dedication to building secure educational platforms..."]
+          </div>
 
-      <div class="terminal-prompt">
-        <div class="terminal-header" onclick="toggleTerminal(this)">
-          <span class="mono">>_ What value can you bring / Why hire you?</span>
-        </div>
-        <div class="terminal-body">
-          <p>I bring a unique hybrid of interactive media development (Unity/VR) and a strong foundation in network communication. I understand not just how to build engaging applications that users love, but the underlying data structures and network layers that power them.</p>
-        </div>
-      </div>
+          <div class="prompt-line">> Query: What value can you bring / Why hire you?</div>
+          <div class="response-line">
+            I bring a unique hybrid of interactive media development (Unity/VR) and a strong foundation in network communication. I understand not just how to build engaging applications that users love, but the underlying data structures and network layers that power them safely.
+          </div>
 
-      <div class="terminal-prompt">
-        <div class="terminal-header" onclick="toggleTerminal(this)">
-          <span class="mono">>_ What are your strengths and weaknesses?</span>
-        </div>
-        <div class="terminal-body">
-          <p><strong>Strength:</strong> High adaptability and self-driven learning, evidenced by independently mastering complex visual tools (ZBrush, Maya) alongside backend logic (Unity C#).</p>
-          <p><strong>Weakness:</strong> I am currently bridging the gap between standard software development and enterprise-level network security, a gap I am actively closing through my certification timeline.</p>
+          <div class="prompt-line">> Query: What are your strengths and weaknesses?</div>
+          <div class="response-line">
+            <span style="color: #27c93f;">STRENGTH:</span> High adaptability and self-driven learning, evidenced by independently mastering complex visual tools (ZBrush, Maya) alongside backend logic (Unity C#).<br><br>
+            <span style="color: #ff5f56;">WEAKNESS:</span> Currently bridging the gap between standard software development and enterprise-level network security, a gap I am actively closing through my strict certification timeline.
+          </div>
+          
+          <div><span style="color: #27c93f;">user@syahmi-sys</span><span style="color: #fff;">:</span><span style="color: #4db8ff;">~/interview</span>$ <span style="animation: blink 1s step-end infinite;">█</span></div>
         </div>
       </div>
     </section>
 
   </main>
 
+  <style>
+    @keyframes blink { 50% { opacity: 0; } }
+  </style>
+
   <script>
-    // Simple script to handle the terminal accordion animation
-    function toggleTerminal(element) {
-      const parent = element.parentElement;
-      parent.classList.toggle('open');
-    }
+    // Simple clock for the top bar to make it feel alive
+    setInterval(() => {
+      const now = new Date();
+      document.getElementById('clock').innerText = now.toLocaleTimeString('en-US', { hour12: false });
+    }, 1000);
   </script>
 </body>
 </html>
