@@ -6,15 +6,19 @@
   <title>Syahmi | E-Portfolio</title>
   <style>
     :root {
-      --bg-main: #0f172a;
-      --bg-panel: #1e293b;
-      --bg-sidebar: #0b1120;
+      --bg-main: #0a0f1c; 
+      --bg-panel: #141e33;
+      --bg-topbar: rgba(10, 15, 28, 0.85);
       --text-primary: #f8fafc;
       --text-secondary: #94a3b8;
       --accent: #38bdf8;
-      --accent-hover: #0284c7;
-      --border: #334155;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+      --border: #2a3b5c;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+      
+      /* Gradients */
+      --grad-text: linear-gradient(to right, #38bdf8, #818cf8);
+      --grad-bg: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+      --grad-subtle: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(129, 140, 248, 0.15));
     }
 
     * { box-sizing: border-box; }
@@ -24,72 +28,95 @@
       margin: 0;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg-main);
+      background-image: radial-gradient(circle at top left, rgba(56, 189, 248, 0.05), transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.05), transparent 40%);
       color: var(--text-primary);
-      display: flex;
-      min-height: 100vh;
-      line-height: 1.5; /* Slightly tighter line height */
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
     /* TYPOGRAPHY */
     h1, h2, h3, h4 { margin-top: 0; font-weight: 600; color: var(--text-primary); }
-    h1 { font-size: 2.25rem; margin-bottom: 0.5rem; letter-spacing: -0.02em; } /* More compact heading */
-    h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1.5rem; color: var(--accent); }
-    h3 { font-size: 1.15rem; margin-bottom: 0.75rem; }
+    h1 { 
+      font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: -0.02em; 
+      background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    h2 { 
+      font-size: 1.6rem; border-bottom: 1px solid var(--border); 
+      padding-bottom: 0.5rem; margin-bottom: 1.5rem; 
+      background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    h3 { font-size: 1.15rem; margin-bottom: 0.75rem; color: #e2e8f0; }
     p { color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.95rem; }
 
-    /* SIDEBAR */
-    .sidebar {
-      width: 240px;
-      background-color: var(--bg-sidebar);
-      border-right: 1px solid var(--border);
-      position: fixed;
-      height: 100vh;
-      padding: 2rem 1.25rem; /* Tighter padding */
-      display: flex;
-      flex-direction: column;
+    /* TOP HEADER BAR */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      background-color: var(--bg-topbar);
+      border-bottom: 1px solid var(--border);
     }
-    .profile-section { text-align: center; margin-bottom: 2rem; }
-    .avatar {
-      width: 70px; height: 70px; /* Slightly smaller avatar */
-      background: linear-gradient(135deg, var(--accent), #818cf8);
-      border-radius: 50%; margin: 0 auto 1rem;
+    .nav {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 4%;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px; 
+      font-weight: 700; font-size: 1.1rem; color: var(--text-primary); 
+      text-decoration: none; letter-spacing: 0.5px;
+    }
+    .logo {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--grad-bg);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; font-weight: 700; color: #fff;
+      font-weight: 800; color: #fff; font-size: 1rem;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
     }
-    .nav-menu { display: flex; flex-direction: column; gap: 0.25rem; }
+    .nav-menu { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
     .nav-menu a {
       color: var(--text-secondary); text-decoration: none;
-      padding: 0.6rem 1rem; border-radius: 0.5rem;
+      padding: 0.5rem 0.85rem; border-radius: 0.5rem;
       transition: all 0.2s ease; font-size: 0.9rem; font-weight: 500;
     }
-    .nav-menu a:hover { background-color: var(--bg-panel); color: var(--text-primary); }
+    .nav-menu a:hover { background: var(--grad-subtle); color: var(--accent); }
 
     /* MAIN CONTENT */
     .main-content {
-      margin-left: 240px;
-      padding: 3rem 4%; /* More compact side padding */
-      width: calc(100% - 240px);
-      max-width: 1100px;
+      max-width: 1100px; margin: 0 auto;
+      padding: 3rem 4%;
     }
-    .section { margin-bottom: 4rem; scroll-margin-top: 3rem; } /* Tighter sections */
+    .section { margin-bottom: 4rem; scroll-margin-top: 5rem; }
+
+    /* SCROLL ANIMATION EFFECTS */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.5, 0, 0, 1);
+    }
+    .reveal.active { opacity: 1; transform: translateY(0); }
 
     /* LAYOUT GRIDS */
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; } /* Tighter gap */
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } /* Tighter gap */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
 
     /* CARDS & PANELS */
     .card {
-      background-color: var(--bg-panel);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem; /* Tighter border radius */
-      padding: 1.5rem; /* Reduced padding from 2rem */
-      box-shadow: var(--shadow);
+      background-color: var(--bg-panel); border: 1px solid var(--border);
+      border-radius: 0.75rem; padding: 1.5rem; box-shadow: var(--shadow);
+      position: relative; overflow: hidden;
     }
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--grad-text); opacity: 0; transition: opacity 0.3s;
+    }
+    .card:hover::before { opacity: 1; }
     
     .tag {
       display: inline-block; padding: 0.25rem 0.6rem;
-      background-color: rgba(56, 189, 248, 0.1); color: var(--accent);
-      border-radius: 9999px; font-size: 0.8rem; font-weight: 500;
+      background: var(--grad-subtle); color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 0.5rem; font-size: 0.8rem; font-weight: 500;
       margin: 0 0.4rem 0.4rem 0;
     }
 
@@ -97,7 +124,7 @@
     .skill-item { margin-bottom: 1.25rem; }
     .skill-info { display: flex; justify-content: space-between; margin-bottom: 0.4rem; font-size: 0.9rem; }
     .progress-bar { width: 100%; height: 6px; background-color: var(--bg-main); border-radius: 999px; overflow: hidden; }
-    .progress-fill { height: 100%; background-color: var(--accent); border-radius: 999px; }
+    .progress-fill { height: 100%; background: var(--grad-bg); border-radius: 999px; box-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
 
     /* TIMELINE */
     .timeline { position: relative; padding-left: 1.5rem; }
@@ -107,133 +134,109 @@
     .timeline-dot {
       position: absolute; left: -1.85rem; top: 0.25rem;
       width: 0.8rem; height: 0.8rem; border-radius: 50%;
-      background-color: var(--bg-main); border: 2px solid var(--accent);
+      background: var(--grad-bg); box-shadow: 0 0 8px rgba(56,189,248,0.6);
     }
     .timeline-date { font-size: 0.85rem; color: var(--accent); font-weight: 600; margin-bottom: 0.25rem; display: block; }
 
     /* EVIDENCE GALLERY */
     .evidence-card {
       background-color: var(--bg-panel); border: 1px solid var(--border);
-      border-radius: 0.75rem; overflow: hidden; transition: transform 0.2s, border-color 0.2s;
-      cursor: pointer; position: relative; display: flex; flex-direction: column;
+      border-radius: 0.75rem; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer; display: flex; flex-direction: column;
     }
-    .evidence-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+    .evidence-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); border-color: rgba(56, 189, 248, 0.4); }
     .evidence-icon {
-      height: 100px; /* Slimmer icon area */
-      background-color: var(--bg-sidebar);
+      height: 100px; background: var(--grad-subtle);
       display: flex; align-items: center; justify-content: center;
       font-size: 2.5rem; border-bottom: 1px solid var(--border);
     }
     .evidence-content { padding: 1.25rem; flex-grow: 1; display: flex; flex-direction: column; }
-    .evidence-content h4 { margin: 0 0 0.4rem 0; font-size: 1.05rem; }
+    .evidence-content h4 { margin: 0 0 0.5rem 0; font-size: 1.05rem; }
     .evidence-content p { font-size: 0.85rem; margin-bottom: 1rem; flex-grow: 1; }
-    .view-prompt { font-size: 0.8rem; color: var(--accent); font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;}
+    .view-prompt { font-size: 0.8rem; color: var(--accent); font-weight: 600; margin-top: auto; }
 
     /* MODAL (POP-UP) SYSTEM - COMPACT TABLE STYLE */
     .modal-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(11, 17, 32, 0.9); backdrop-filter: blur(4px);
+      background-color: rgba(10, 15, 28, 0.85); backdrop-filter: blur(5px);
       display: flex; align-items: center; justify-content: center;
       z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
     }
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
     
     .modal-content {
-      background-color: var(--bg-main); /* Match screenshot dark background */
-      border: 1px solid var(--border);
+      background-color: var(--bg-main); border: 1px solid var(--border);
       border-radius: 12px; padding: 2rem; max-width: 750px; width: 90%; max-height: 90vh; overflow-y: auto;
-      position: relative; transform: translateY(10px); transition: transform 0.2s ease;
+      position: relative; transform: scale(0.95); transition: transform 0.2s ease;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
     }
-    .modal-overlay.active .modal-content { transform: translateY(0); }
+    .modal-overlay.active .modal-content { transform: scale(1); }
     
     .close-btn {
       position: absolute; top: 1.5rem; right: 1.5rem;
       background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 9999px;
       color: var(--text-primary); font-size: 0.8rem; cursor: pointer; 
-      padding: 0.4rem 1rem; display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s; font-weight: 500;
+      padding: 0.4rem 1rem; transition: all 0.2s; font-weight: 500;
     }
     .close-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); }
     
-    .modal-content h2 { border-bottom: none; margin-bottom: 0.25rem; padding-bottom: 0; color: #fff; font-size: 1.8rem; padding-right: 80px; }
+    .modal-content h2 { border-bottom: none; margin-bottom: 0.25rem; padding-bottom: 0; font-size: 1.8rem; padding-right: 80px; }
     .modal-subtitle { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
 
     .modal-table {
-      display: flex; flex-direction: column;
-      border-radius: 8px; overflow: hidden;
-      background-color: var(--bg-panel);
+      display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background-color: var(--bg-panel);
     }
-    .modal-row {
-      display: flex;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    }
+    .modal-row { display: flex; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
     .modal-row:last-child { border-bottom: none; }
     .modal-label {
-      width: 28%;
-      background-color: rgba(15, 23, 42, 0.6); /* Distinct dark blue left column */
-      padding: 1rem 1.25rem; /* Tighter padding */
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 0.9rem;
+      width: 28%; background-color: rgba(15, 23, 42, 0.6); 
+      padding: 1rem 1.25rem; color: var(--accent); font-weight: 600; font-size: 0.9rem;
       border-right: 1px solid rgba(255, 255, 255, 0.03);
     }
-    .modal-value {
-      width: 72%;
-      padding: 1rem 1.25rem; /* Tighter padding */
-      color: var(--text-primary);
-      font-size: 0.95rem;
-    }
+    .modal-value { width: 72%; padding: 1rem 1.25rem; color: var(--text-primary); font-size: 0.95rem; }
     .modal-note { font-size: 0.85rem; color: var(--text-secondary); margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem; }
 
     /* REFLECTION Q&A */
     .qa-box {
       border-left: 3px solid var(--accent);
-      background-color: rgba(30, 41, 59, 0.4); /* Slightly subtler background */
+      background-color: rgba(30, 41, 59, 0.4); 
       padding: 1.25rem; border-radius: 0 0.5rem 0.5rem 0; margin-bottom: 1rem;
     }
     .qa-box h4 { margin-bottom: 0.4rem; color: var(--text-primary); font-size: 1rem; }
     .qa-box p { margin: 0; font-size: 0.95rem; }
 
     /* RESPONSIVE */
-    @media (max-width: 900px) {
-      body { flex-direction: column; }
-      .sidebar { width: 100%; height: auto; position: static; padding: 1.25rem; border-right: none; border-bottom: 1px solid var(--border); flex-direction: row; align-items: center; justify-content: space-between; }
-      .profile-section { margin-bottom: 0; display: flex; align-items: center; gap: 1rem; text-align: left; }
-      .avatar { width: 45px; height: 45px; margin: 0; font-size: 1rem; }
-      .nav-menu { display: none; }
-      .main-content { margin-left: 0; width: 100%; padding: 2rem 1.25rem; }
-      .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 1.25rem; }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .nav { flex-direction: column; gap: 1rem; }
+      .nav-menu { justify-content: center; }
       .modal-row { flex-direction: column; }
       .modal-label, .modal-value { width: 100%; padding: 0.85rem 1rem; }
       .modal-label { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
-      .modal-content h2 { font-size: 1.4rem; }
     }
   </style>
 </head>
 <body>
 
-  <aside class="sidebar">
-    <div class="profile-section">
-      <div class="avatar">IM</div>
-      <div>
-        <div style="font-weight: 600; color: var(--text-primary);">CSA30203 Portfolio</div>
-        <div style="font-size: 0.85rem; color: var(--text-secondary);">Computer Network Security</div>
+  <header class="topbar">
+    <nav class="nav">
+      <a href="#hero" class="brand">
+        <div class="logo">IM</div>
+        <span>CSA30203 Portfolio</span>
+      </a>
+      <div class="nav-menu">
+        <a href="#career">Exploration</a>
+        <a href="#skills">Skills</a>
+        <a href="#plan">Plan</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#reflection">Reflection</a>
       </div>
-    </div>
-    <nav class="nav-menu">
-      <a href="#hero">Profile</a>
-      <a href="#career">Career Exploration</a>
-      <a href="#skills">Skills Assessment</a>
-      <a href="#plan">Development Plan</a>
-      <a href="#evidence">Evidence of Learning</a>
-      <a href="#reflection">Personal Reflection</a>
     </nav>
-  </aside>
+  </header>
 
   <main class="main-content">
     
-    <section id="hero" class="section" style="margin-bottom: 3rem;">
+    <section id="hero" class="section reveal">
       <span style="color: var(--accent); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Individual E-Portfolio (20%)</span>
       <h1>Muhammad Syahmi bin Mohd Noor</h1>
       <p style="font-size: 1.1rem; max-width: 800px; margin-top: 0.75rem;">
@@ -246,7 +249,7 @@
       </div>
     </section>
 
-    <section id="career" class="section">
+    <section id="career" class="section reveal">
       <h2>Career Exploration</h2>
       <div class="grid-2">
         <div class="card">
@@ -261,7 +264,7 @@
       </div>
     </section>
 
-    <section id="skills" class="section">
+    <section id="skills" class="section reveal">
       <h2>Personal Skills Assessment</h2>
       <div class="grid-2">
         <div class="card">
@@ -293,7 +296,7 @@
       </div>
     </section>
 
-    <section id="plan" class="section">
+    <section id="plan" class="section reveal">
       <h2>Career Development Plan</h2>
       <div class="card">
         <div class="timeline">
@@ -321,7 +324,7 @@
       </div>
     </section>
 
-    <section id="evidence" class="section">
+    <section id="evidence" class="section reveal">
       <h2>Evidence of Learning</h2>
       <div class="grid-3">
         
@@ -358,9 +361,9 @@
       </div>
     </section>
 
-    <section id="reflection" class="section">
+    <section id="reflection" class="section reveal">
       <h2>Personal Reflection</h2>
-      <p style="margin-bottom: 1.5rem;"><strong>Target Dream Company:</strong> [Insert Your Dream Company Here]</p>
+      <p style="margin-bottom: 2rem;"><strong>Target Dream Company:</strong> [Insert Your Dream Company Here]</p>
       
       <div class="qa-box">
         <h4>Why do you want to work for this company?</h4>
@@ -469,17 +472,17 @@
   </div>
 
   <script>
+    /* Modal Functions */
     function openModal(modalId) {
       document.getElementById(modalId).classList.add('active');
-      document.body.style.overflow = 'hidden'; // Prevents scrolling behind the modal
+      document.body.style.overflow = 'hidden'; 
     }
 
     function closeModal(modalId) {
       document.getElementById(modalId).classList.remove('active');
-      document.body.style.overflow = 'auto'; // Restores scrolling
+      document.body.style.overflow = 'auto'; 
     }
 
-    // Allow closing modals with the Escape key
     document.addEventListener('keydown', function(event) {
       if (event.key === 'Escape') {
         const activeModals = document.querySelectorAll('.modal-overlay.active');
@@ -489,6 +492,23 @@
         });
       }
     });
+
+    /* Scroll Reveal Animation */
+    function reveal() {
+      var reveals = document.querySelectorAll(".reveal");
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 100;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active");
+        }
+      }
+    }
+    
+    window.addEventListener("scroll", reveal);
+    reveal(); // Trigger on initial load
   </script>
 
 </body>
