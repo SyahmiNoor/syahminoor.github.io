@@ -3,442 +3,493 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Individual e-Portfolio | BIT Informatics Media</title>
+  <title>Syahmi | E-Portfolio</title>
   <style>
-    :root{
-      --bg:#08111f;
-      --panel:#101b2e;
-      --panel2:#14233b;
-      --text:#eef6ff;
-      --muted:#a9bbd3;
-      --accent:#32d1ff;
-      --accent2:#8ee6a8;
-      --warning:#ffd166;
-      --line:rgba(255,255,255,.12);
-      --shadow:0 12px 30px rgba(0,0,0,.35);
-      --radius:12px; /* Compacted from 22px */
+    :root {
+      --bg-main: #0f172a;
+      --bg-panel: #1e293b;
+      --bg-sidebar: #0b1120;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --border: #334155;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
     }
-    [data-theme="light"]{
-      --bg:#f5f8ff;
-      --panel:#ffffff;
-      --panel2:#eef5ff;
-      --text:#102033;
-      --muted:#53667e;
-      --accent:#0066cc;
-      --accent2:#138a45;
-      --warning:#a56800;
-      --line:rgba(10,30,60,.14);
-      --shadow:0 10px 25px rgba(18,43,75,.12);
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter, Segoe UI, Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(50,209,255,.12), transparent 25rem),
-        radial-gradient(circle at 80% 10%, rgba(142,230,168,.08), transparent 25rem),
-        var(--bg);
-      color:var(--text);
-      line-height:1.5;
-    }
-    a{color:inherit;text-decoration:none}
-    
-    /* Topbar - Compacted padding */
-    .topbar{
-      position:sticky;top:0;z-index:50;
-      backdrop-filter:blur(18px);
-      background:rgba(8,17,31,.72);
-      border-bottom:1px solid var(--line);
-    }
-    [data-theme="light"] .topbar{background:rgba(245,248,255,.82)}
-    .nav{
-      max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;
-      padding:10px 20px;gap:16px;
-    }
-    .brand{display:flex;align-items:center;gap:10px;font-weight:750;font-size:0.95rem;letter-spacing:.3px}
-    .logo{
-      width:36px;height:36px;border-radius:10px;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      display:grid;place-items:center;color:#06101d;font-weight:900;
-      box-shadow:0 0 15px rgba(50,209,255,.3);
-    }
-    .links{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-    .links a,.btn{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:var(--text);padding:6px 12px;border-radius:999px;
-      font-weight:600;font-size:.85rem;cursor:pointer;
-    }
-    .links a:hover,.btn:hover{border-color:var(--accent);box-shadow:0 0 0 2px rgba(50,209,255,.12)}
-    
-    /* Hero Section - Compacted spacing */
-    .hero{
-      max-width:1180px;margin:0 auto;padding:40px 20px 24px;
-      display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:center;
-    }
-    .badge{display:inline-flex;gap:6px;align-items:center;color:var(--accent2);font-weight:700;font-size:0.85rem;margin-bottom:10px}
-    h1{font-size:clamp(1.8rem,4vw,3.2rem);line-height:1.1;margin:0 0 12px;letter-spacing:-1px}
-    h2{font-size:clamp(1.3rem,2.5vw,1.8rem);line-height:1.2;margin:0 0 14px;letter-spacing:-0.5px}
-    h3{margin:0 0 8px;font-size:1.05rem}
-    p{margin:0 0 12px;color:var(--muted);font-size:0.95rem;}
-    
-    .hero-card,.card,.panel{
-      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-      border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
-    }
-    [data-theme="light"] .hero-card,[data-theme="light"] .card,[data-theme="light"] .panel{background:var(--panel)}
-    .hero-card{padding:20px;position:relative;overflow:hidden}
-    .hero-card:before{
-      content:"";position:absolute;inset:-40% -30% auto auto;width:200px;height:200px;border-radius:50%;
-      background:rgba(50,209,255,.15);filter:blur(25px)
-    }
-    .profile{display:flex;gap:16px;align-items:center;position:relative;z-index:1}
-    .avatar{
-      width:75px;height:75px;border-radius:20px;display:grid;place-items:center;
-      background:linear-gradient(135deg,#152a49,#214f7c);border:1px solid var(--line);
-      font-size:1.8rem;font-weight:900;color:var(--accent);
-    }
-    .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-    .chip{padding:5px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.75rem;background:rgba(255,255,255,.04)}
-    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#05101d;border:0;font-weight:800}
-    
-    /* Layout */
-    .section{max-width:1180px;margin:0 auto;padding:24px 20px}
-    .grid{display:grid;gap:14px}
-    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
-    .card{padding:16px}
-    .card .icon{font-size:1.6rem;margin-bottom:8px}
-    .mini{font-size:.8rem;color:var(--muted)}
-    
-    /* Stats */
-    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
-    .stat{padding:12px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
-    .stat b{display:block;font-size:1.4rem;color:var(--accent)}
-    
-    /* Timeline */
-    .timeline{position:relative;margin-top:8px}
-    .timeline:before{content:"";position:absolute;left:14px;top:8px;bottom:8px;width:2px;background:var(--line)}
-    .timeitem{position:relative;padding:0 0 16px 42px}
-    .dot{position:absolute;left:5px;top:4px;width:18px;height:18px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(50,209,255,.12)}
-    
-    /* Tabs & Filters */
-    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 16px}
-    .tab{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);cursor:pointer;color:var(--muted);font-weight:600;font-size:0.85rem;}
-    .tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06101d;border:0}
-    .tab-content{display:none}
-    .tab-content.active{display:block}
-    
-    .project-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-    .filter{padding:6px 12px;border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:999px;color:var(--text);cursor:pointer;font-size:0.85rem;}
-    .filter.active{border-color:var(--accent);background:rgba(50,209,255,.13)}
-    
-    /* Projects */
-    .project-card{overflow:hidden;padding:0;cursor:pointer;transition:transform 0.2s;}
-    .project-card:hover{transform:translateY(-2px);border-color:var(--accent);}
-    .project-cover{height:100px;background:linear-gradient(135deg,rgba(50,209,255,.15),rgba(142,230,168,.1));display:grid;place-items:center;font-size:2.2rem}
-    .project-body{padding:14px}
-    .tag{display:inline-block;margin:3px 3px 3px 0;font-size:.75rem;padding:4px 8px;border-radius:999px;background:rgba(50,209,255,.1);border:1px solid rgba(50,209,255,.2);color:var(--accent)}
-    
-    /* Skills Bars */
-    .skill{margin:12px 0}
-    .skill-top{display:flex;justify-content:space-between;font-weight:650;font-size:.85rem}
-    .bar{height:8px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin-top:6px;border:1px solid var(--line)}
-    .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px;transition:width 1s ease}
-    
-    /* Accordions & Checklists */
-    .accordion{border:1px solid var(--line);border-radius:12px;margin:8px 0;overflow:hidden;background:rgba(255,255,255,.03)}
-    .accordion button{width:100%;text-align:left;background:transparent;color:var(--text);border:0;padding:14px;font-weight:700;cursor:pointer;font-size:.95rem;display:flex;justify-content:space-between;gap:10px}
-    .acc-body{display:none;padding:0 14px 14px;color:var(--muted);font-size:0.9rem;}
-    .accordion.open .acc-body{display:block}
-    
-    .checklist{display:grid;gap:10px}
-    .check{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02)}
-    .check input{margin-top:4px;accent-color:var(--accent)}
-    
-    /* General Tables (Used in Tabs & Future Plan) */
-    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:10px;border:1px solid var(--line)}
-    th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:0.9rem;}
-    th{color:var(--accent);background:rgba(50,209,255,.06);font-weight:650;}
-    
-    /* Modals */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:99;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px);}
-    .modal.open{display:flex}
-    .modal-inner{max-width:760px;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:24px;max-height:86vh;overflow:auto}
-    .modal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:18px}
-    .x{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);border-radius:10px;padding:6px 12px;cursor:pointer;font-size:0.85rem;font-weight:600;}
-    .x:hover{background:var(--accent);color:#000;}
 
-    /* MODAL TABLE OVERRIDE - Matches Screenshot Design */
-    .modal table { display: flex; flex-direction: column; background: rgba(255,255,255,.02); border-radius: 12px; }
-    .modal tbody { display: flex; flex-direction: column; width: 100%; }
-    .modal tr { display: flex; width: 100%; border-bottom: 1px solid var(--line); }
-    .modal tr:last-child { border-bottom: none; }
-    .modal th { width: 30%; border-bottom: none; border-right: 1px solid var(--line); background: rgba(50,209,255,.06); font-weight: 700; padding: 14px 16px; display: flex; align-items: center;}
-    .modal td { width: 70%; border-bottom: none; padding: 14px 16px; color: #fff; }
-
-    .footer{padding:24px 20px;border-top:1px solid var(--line);text-align:center;color:var(--muted);margin-top:20px;font-size:0.85rem;}
-    .print-note{display:none}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr;padding-top:24px}.grid.cols-3,.grid.cols-2,.stat-row{grid-template-columns:1fr}.links{display:none}
-      .modal tr { flex-direction: column; }
-      .modal th { width: 100%; border-right: none; border-bottom: 1px solid var(--line); }
-      .modal td { width: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      display: flex;
+      min-height: 100vh;
+      line-height: 1.5; /* Slightly tighter line height */
     }
-    @media print{
-      .topbar,.hero-actions,.project-toolbar,.tabs,.modal{display:none!important}
-      body{background:white;color:#111}.card,.hero-card,.panel{box-shadow:none;border:1px solid #ddd;background:white}.tab-content{display:block!important}.print-note{display:block}
-      p,.mini{color:#444}.section{padding:16px 20px}.hero{display:block;padding:20px}.grid.cols-3,.grid.cols-2{grid-template-columns:1fr 1fr}
+
+    /* TYPOGRAPHY */
+    h1, h2, h3, h4 { margin-top: 0; font-weight: 600; color: var(--text-primary); }
+    h1 { font-size: 2.25rem; margin-bottom: 0.5rem; letter-spacing: -0.02em; } /* More compact heading */
+    h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1.5rem; color: var(--accent); }
+    h3 { font-size: 1.15rem; margin-bottom: 0.75rem; }
+    p { color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.95rem; }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      height: 100vh;
+      padding: 2rem 1.25rem; /* Tighter padding */
+      display: flex;
+      flex-direction: column;
+    }
+    .profile-section { text-align: center; margin-bottom: 2rem; }
+    .avatar {
+      width: 70px; height: 70px; /* Slightly smaller avatar */
+      background: linear-gradient(135deg, var(--accent), #818cf8);
+      border-radius: 50%; margin: 0 auto 1rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; font-weight: 700; color: #fff;
+    }
+    .nav-menu { display: flex; flex-direction: column; gap: 0.25rem; }
+    .nav-menu a {
+      color: var(--text-secondary); text-decoration: none;
+      padding: 0.6rem 1rem; border-radius: 0.5rem;
+      transition: all 0.2s ease; font-size: 0.9rem; font-weight: 500;
+    }
+    .nav-menu a:hover { background-color: var(--bg-panel); color: var(--text-primary); }
+
+    /* MAIN CONTENT */
+    .main-content {
+      margin-left: 240px;
+      padding: 3rem 4%; /* More compact side padding */
+      width: calc(100% - 240px);
+      max-width: 1100px;
+    }
+    .section { margin-bottom: 4rem; scroll-margin-top: 3rem; } /* Tighter sections */
+
+    /* LAYOUT GRIDS */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; } /* Tighter gap */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } /* Tighter gap */
+
+    /* CARDS & PANELS */
+    .card {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem; /* Tighter border radius */
+      padding: 1.5rem; /* Reduced padding from 2rem */
+      box-shadow: var(--shadow);
+    }
+    
+    .tag {
+      display: inline-block; padding: 0.25rem 0.6rem;
+      background-color: rgba(56, 189, 248, 0.1); color: var(--accent);
+      border-radius: 9999px; font-size: 0.8rem; font-weight: 500;
+      margin: 0 0.4rem 0.4rem 0;
+    }
+
+    /* SKILLS PROGRESS BARS */
+    .skill-item { margin-bottom: 1.25rem; }
+    .skill-info { display: flex; justify-content: space-between; margin-bottom: 0.4rem; font-size: 0.9rem; }
+    .progress-bar { width: 100%; height: 6px; background-color: var(--bg-main); border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; background-color: var(--accent); border-radius: 999px; }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 1.5rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background-color: var(--border); }
+    .timeline-item { position: relative; margin-bottom: 2rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute; left: -1.85rem; top: 0.25rem;
+      width: 0.8rem; height: 0.8rem; border-radius: 50%;
+      background-color: var(--bg-main); border: 2px solid var(--accent);
+    }
+    .timeline-date { font-size: 0.85rem; color: var(--accent); font-weight: 600; margin-bottom: 0.25rem; display: block; }
+
+    /* EVIDENCE GALLERY */
+    .evidence-card {
+      background-color: var(--bg-panel); border: 1px solid var(--border);
+      border-radius: 0.75rem; overflow: hidden; transition: transform 0.2s, border-color 0.2s;
+      cursor: pointer; position: relative; display: flex; flex-direction: column;
+    }
+    .evidence-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+    .evidence-icon {
+      height: 100px; /* Slimmer icon area */
+      background-color: var(--bg-sidebar);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem; border-bottom: 1px solid var(--border);
+    }
+    .evidence-content { padding: 1.25rem; flex-grow: 1; display: flex; flex-direction: column; }
+    .evidence-content h4 { margin: 0 0 0.4rem 0; font-size: 1.05rem; }
+    .evidence-content p { font-size: 0.85rem; margin-bottom: 1rem; flex-grow: 1; }
+    .view-prompt { font-size: 0.8rem; color: var(--accent); font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;}
+
+    /* MODAL (POP-UP) SYSTEM - COMPACT TABLE STYLE */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(11, 17, 32, 0.9); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    
+    .modal-content {
+      background-color: var(--bg-main); /* Match screenshot dark background */
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 2rem; max-width: 750px; width: 90%; max-height: 90vh; overflow-y: auto;
+      position: relative; transform: translateY(10px); transition: transform 0.2s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    .modal-overlay.active .modal-content { transform: translateY(0); }
+    
+    .close-btn {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 9999px;
+      color: var(--text-primary); font-size: 0.8rem; cursor: pointer; 
+      padding: 0.4rem 1rem; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; font-weight: 500;
+    }
+    .close-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); }
+    
+    .modal-content h2 { border-bottom: none; margin-bottom: 0.25rem; padding-bottom: 0; color: #fff; font-size: 1.8rem; padding-right: 80px; }
+    .modal-subtitle { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+    .modal-table {
+      display: flex; flex-direction: column;
+      border-radius: 8px; overflow: hidden;
+      background-color: var(--bg-panel);
+    }
+    .modal-row {
+      display: flex;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .modal-row:last-child { border-bottom: none; }
+    .modal-label {
+      width: 28%;
+      background-color: rgba(15, 23, 42, 0.6); /* Distinct dark blue left column */
+      padding: 1rem 1.25rem; /* Tighter padding */
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-right: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .modal-value {
+      width: 72%;
+      padding: 1rem 1.25rem; /* Tighter padding */
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+    .modal-note { font-size: 0.85rem; color: var(--text-secondary); margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+
+    /* REFLECTION Q&A */
+    .qa-box {
+      border-left: 3px solid var(--accent);
+      background-color: rgba(30, 41, 59, 0.4); /* Slightly subtler background */
+      padding: 1.25rem; border-radius: 0 0.5rem 0.5rem 0; margin-bottom: 1rem;
+    }
+    .qa-box h4 { margin-bottom: 0.4rem; color: var(--text-primary); font-size: 1rem; }
+    .qa-box p { margin: 0; font-size: 0.95rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: static; padding: 1.25rem; border-right: none; border-bottom: 1px solid var(--border); flex-direction: row; align-items: center; justify-content: space-between; }
+      .profile-section { margin-bottom: 0; display: flex; align-items: center; gap: 1rem; text-align: left; }
+      .avatar { width: 45px; height: 45px; margin: 0; font-size: 1rem; }
+      .nav-menu { display: none; }
+      .main-content { margin-left: 0; width: 100%; padding: 2rem 1.25rem; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 1.25rem; }
+      .modal-row { flex-direction: column; }
+      .modal-label, .modal-value { width: 100%; padding: 0.85rem 1rem; }
+      .modal-label { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
+      .modal-content h2 { font-size: 1.4rem; }
     }
   </style>
 </head>
-<body data-theme="dark">
-  <header class="topbar">
-    <nav class="nav">
-      <a href="#home" class="brand"><span class="logo">IM</span><span>BIT Informatics Media e-Portfolio</span></a>
-      <div class="links">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#reflection">Reflection</a>
-        <a href="#readiness">Readiness</a>
-        <button class="btn" onclick="toggleTheme()">Toggle Theme</button>
-      </div>
-    </nav>
-  </header>
+<body>
 
-  <main id="home">
-    <section class="hero">
+  <aside class="sidebar">
+    <div class="profile-section">
+      <div class="avatar">IM</div>
       <div>
-        <div class="badge">● Individual e-Portfolio Example</div>
-        <h1>Nur Aisyah Binti Ahmad</h1>
-        <p style="font-size:1.1rem;max-width:760px">Bachelor of Information Technology (Informatics Media) student portfolio demonstrating web development, UI/UX design, multimedia content, database design, computer networking, and cybersecurity awareness.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#projects">View Projects</a>
-          <button class="btn" onclick="window.print()">Print / Save as PDF</button>
-          <a class="btn" href="#checklist">Portfolio Checklist</a>
-        </div>
+        <div style="font-weight: 600; color: var(--text-primary);">CSA30203 Portfolio</div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary);">Computer Network Security</div>
       </div>
-      <aside class="hero-card">
-        <div class="profile">
-          <div class="avatar">NA</div>
-          <div>
-            <h3>Portfolio Theme</h3>
-            <p>Building creative, secure, and user-centred digital media solutions.</p>
-            <div class="chips">
-              <span class="chip">UI/UX</span><span class="chip">Web Media</span><span class="chip">Cyber Awareness</span><span class="chip">Interactive Learning</span>
-            </div>
-          </div>
-        </div>
-        <div class="stat-row">
-          <div class="stat"><b>6</b><span class="mini">Project Artefacts</span></div>
-          <div class="stat"><b>4</b><span class="mini">Career Paths</span></div>
-          <div class="stat"><b>8</b><span class="mini">Core Skills</span></div>
-          <div class="stat"><b>1</b><span class="mini">Professional Goal</span></div>
-        </div>
-      </aside>
-    </section>
+    </div>
+    <nav class="nav-menu">
+      <a href="#hero">Profile</a>
+      <a href="#career">Career Exploration</a>
+      <a href="#skills">Skills Assessment</a>
+      <a href="#plan">Development Plan</a>
+      <a href="#evidence">Evidence of Learning</a>
+      <a href="#reflection">Personal Reflection</a>
+    </nav>
+  </aside>
 
-    <section id="about" class="section">
-      <div class="grid cols-2">
-        <div class="card">
-          <h2>About Me</h2>
-          <p>I am a Bachelor of Information Technology student specialising in Informatics Media. My academic interest focuses on interactive digital media, web-based systems, user interface design, multimedia production, and secure digital communication.</p>
-          <p>This portfolio presents selected academic works that show how technical, creative, and communication skills can be integrated to produce meaningful digital solutions for education, business, and community use.</p>
-        </div>
-        <div class="card">
-          <h2>Career Goal</h2>
-          <p>My goal is to become a UI/UX Designer, Web Developer, Digital Media Specialist, or cybersecurity-aware digital media technologist.</p>
-          <p>I aim to create digital platforms that are usable, accessible, visually effective, and safe for users.</p>
-        </div>
+  <main class="main-content">
+    
+    <section id="hero" class="section" style="margin-bottom: 3rem;">
+      <span style="color: var(--accent); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Individual E-Portfolio (20%)</span>
+      <h1>Muhammad Syahmi bin Mohd Noor</h1>
+      <p style="font-size: 1.1rem; max-width: 800px; margin-top: 0.75rem;">
+        Information Technology student transitioning foundational skills in C# application development, interactive design, and digital networking into modern, secure software architecture.
+      </p>
+      <div style="margin-top: 1.25rem;">
+        <span class="tag">Security-Focused Software Developer</span>
+        <span class="tag">C# / Unity</span>
+        <span class="tag">Network Architecture</span>
       </div>
     </section>
 
-    <section class="section">
-      <h2>Academic Journey Timeline</h2>
-      <div class="panel" style="padding:22px">
-        <div class="timeline">
-          <div class="timeitem"><span class="dot"></span><h3>Year 1: IT Foundation</h3><p>Developed foundational understanding in programming, computer systems, digital logic, databases, and basic multimedia concepts.</p></div>
-          <div class="timeitem"><span class="dot"></span><h3>Year 2: Media and Application Development</h3><p>Built web pages, designed user interfaces, produced digital media content, and applied database concepts in small systems.</p></div>
-          <div class="timeitem"><span class="dot"></span><h3>Year 3: Integration and Professional Practice</h3><p>Integrated media design, networking, cybersecurity awareness, project management, and user-centred evaluation into academic projects.</p></div>
-          <div class="timeitem"><span class="dot"></span><h3>Final Year: Capstone Direction</h3><p>Prepared to propose a final-year project related to interactive learning media, secure web application, or digital awareness platform.</p></div>
+    <section id="career" class="section">
+      <h2>Career Exploration</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Target Role</h3>
+          <p style="color: var(--text-primary); font-weight: 500;">Security-Focused Software Developer</p>
+          <p><strong>Responsibilities:</strong> Designing, building, and testing software with security integrated throughout the development lifecycle (DevSecOps). This involves writing secure logic, preventing vulnerabilities natively within applications, and ensuring secure data communication across network layers.</p>
+        </div>
+        <div class="card">
+          <h3>Relevance to Modern Cybersecurity</h3>
+          <p>The traditional model of relying solely on firewalls and adding security after an application is built is obsolete. Modern cyber threats target the application layer directly. The industry requires developers who understand network architecture (OSI/TCP models) and can prevent exploits natively within the code before deployment.</p>
         </div>
       </div>
     </section>
 
     <section id="skills" class="section">
-      <h2>Skills Profile</h2>
-      <div class="tabs">
-        <button class="tab active" onclick="openTab(event,'technical')">Technical Skills</button>
-        <button class="tab" onclick="openTab(event,'media')">Media & Design</button>
-        <button class="tab" onclick="openTab(event,'soft')">Professional Skills</button>
-      </div>
-      <div id="technical" class="tab-content active">
-        <div class="grid cols-2">
-          <div class="card">
-            <h3>Technical Competencies</h3>
-            <div class="skill"><div class="skill-top"><span>HTML, CSS, JavaScript</span><span>82%</span></div><div class="bar"><div class="fill" data-w="82%"></div></div></div>
-            <div class="skill"><div class="skill-top"><span>Database Design</span><span>74%</span></div><div class="bar"><div class="fill" data-w="74%"></div></div></div>
-            <div class="skill"><div class="skill-top"><span>Basic Network Security</span><span>68%</span></div><div class="bar"><div class="fill" data-w="68%"></div></div></div>
-            <div class="skill"><div class="skill-top"><span>Responsive Web Development</span><span>78%</span></div><div class="bar"><div class="fill" data-w="78%"></div></div></div>
+      <h2>Personal Skills Assessment</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Current Technical Skills</h3>
+          <div class="skill-item">
+            <div class="skill-info"><span>C# Programming & Unity</span><span>85%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
           </div>
-          <div class="card">
-            <h3>Evidence</h3>
-            <table><tr><th>Skill</th><th>Evidence</th></tr><tr><td>Web development</td><td>Responsive personal website and campaign microsite</td></tr><tr><td>Database</td><td>Entity relationship diagram and SQL table design</td></tr><tr><td>Networking</td><td>Secure basic network diagram and awareness materials</td></tr></table>
+          <div class="skill-item">
+            <div class="skill-info"><span>Networking Basics (OSI, TCP/IP)</span><span>75%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info"><span>Interactive Digital Design (3D/VR)</span><span>80%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 80%;"></div></div>
           </div>
         </div>
-      </div>
-      <div id="media" class="tab-content">
-        <div class="grid cols-3">
-          <div class="card"><div class="icon">🎨</div><h3>Visual Design</h3><p>Uses layout, colour, typography, and visual hierarchy to communicate ideas clearly.</p></div>
-          <div class="card"><div class="icon">📱</div><h3>UI/UX Design</h3><p>Creates wireframes, user flows, and prototypes based on user needs and usability principles.</p></div>
-          <div class="card"><div class="icon">🎬</div><h3>Multimedia Production</h3><p>Produces posters, infographics, short videos, and learning materials for digital platforms.</p></div>
-        </div>
-      </div>
-      <div id="soft" class="tab-content">
-        <div class="grid cols-3">
-          <div class="card"><div class="icon">🗣️</div><h3>Communication</h3><p>Presents technical and creative work clearly to classmates, lecturers, and stakeholders.</p></div>
-          <div class="card"><div class="icon">🤝</div><h3>Teamwork</h3><p>Collaborates in group-based design and development activities with clear task distribution.</p></div>
-          <div class="card"><div class="icon">🧩</div><h3>Problem Solving</h3><p>Applies testing, feedback, and iteration to improve digital artefacts.</p></div>
+
+        <div class="card">
+          <h3>Soft Skills</h3>
+          <ul style="color: var(--text-secondary); margin-bottom: 1.5rem; padding-left: 1.2rem; font-size: 0.95rem;">
+            <li style="margin-bottom: 0.5rem;"><strong>Teamwork & Communication:</strong> Proven collaboration in digital strategy (Pink Corner project) and public relations for university committees (JPLK).</li>
+            <li><strong>Problem Solving:</strong> Iterating on educational designs based on direct user feedback testing (KIAS project).</li>
+          </ul>
+          
+          <h3>Industry Requirements Comparison</h3>
+          <p style="font-size: 0.95rem; margin-bottom: 0;">While my foundational programming and networking theories are strong, industry standards for a Security-Focused Developer require specific, formal knowledge of secure coding practices (like OWASP Top 10) and practical familiarity with penetration testing tools. This gap dictates my current career development plan.</p>
         </div>
       </div>
     </section>
 
-    <section id="projects" class="section">
-      <h2>Academic Project Gallery</h2>
-      <p>Click a project card to view its academic description, tools used, evidence, and reflection.</p>
-      <div class="project-toolbar">
-        <button class="filter active" onclick="filterProjects('all',event)">All</button>
-        <button class="filter" onclick="filterProjects('web',event)">Web</button>
-        <button class="filter" onclick="filterProjects('ux',event)">UI/UX</button>
-        <button class="filter" onclick="filterProjects('security',event)">Cybersecurity</button>
-        <button class="filter" onclick="filterProjects('media',event)">Media</button>
+    <section id="plan" class="section">
+      <h2>Career Development Plan</h2>
+      <div class="card">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-date">Short-Term: Next 6 Months</span>
+            <h3>Academic & Tool Mastery</h3>
+            <p>Successfully complete and present my Final Year Project. Dedicate time to mastering essential network analysis tools like <strong>Wireshark</strong> to monitor traffic, and learn basic <strong>Python</strong> for security automation and scripting.</p>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-date">Short-Term: 2 Years</span>
+            <h3>Certification & Initial Placement</h3>
+            <p>Obtain foundational industry certifications such as <strong>CompTIA Security+</strong> to validate my knowledge. Secure a junior software development role focusing on building secure application architectures.</p>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-date">Long-Term: 5 Years</span>
+            <h3>Specialization & Advanced Architecture</h3>
+            <p>Transition into a mid-level Security-Focused Software Developer or DevSecOps Engineer role. Pursue advanced cloud security certifications (e.g., <strong>AWS Certified Security - Specialty</strong>) to handle enterprise-level infrastructure.</p>
+          </div>
+        </div>
       </div>
-      <div class="grid cols-3" id="projectGrid">
-        <article class="card project-card" data-cat="web" onclick="showProject(0)"><div class="project-cover">🌐</div><div class="project-body"><h3>Personal Responsive Website</h3><p>A student branding website using HTML, CSS, and JavaScript.</p><span class="tag">Web</span><span class="tag">Responsive</span></div></article>
-        <article class="card project-card" data-cat="ux" onclick="showProject(1)"><div class="project-cover">📱</div><div class="project-body"><h3>UniEvent App Prototype</h3><p>A mobile app prototype for university event discovery and registration.</p><span class="tag">Figma</span><span class="tag">UX</span></div></article>
-        <article class="card project-card" data-cat="security media" onclick="showProject(2)"><div class="project-cover">🛡️</div><div class="project-body"><h3>Cybersecurity Awareness Campaign</h3><p>Digital campaign materials on phishing, passwords, and privacy.</p><span class="tag">Security</span><span class="tag">Media</span></div></article>
-        <article class="card project-card" data-cat="media" onclick="showProject(3)"><div class="project-cover">🎓</div><div class="project-body"><h3>Interactive Learning Material</h3><p>Multimedia learning content for basic networking concepts.</p><span class="tag">H5P</span><span class="tag">Learning</span></div></article>
-        <article class="card project-card" data-cat="web security" onclick="showProject(4)"><div class="project-cover">🔐</div><div class="project-body"><h3>Secure Login Interface</h3><p>A prototype login page with usability and security awareness features.</p><span class="tag">Web</span><span class="tag">Security</span></div></article>
-        <article class="card project-card" data-cat="media ux" onclick="showProject(5)"><div class="project-cover">📊</div><div class="project-body"><h3>Digital Media Analytics Poster</h3><p>Visual explanation of engagement metrics for media content.</p><span class="tag">Infographic</span><span class="tag">Analytics</span></div></article>
+    </section>
+
+    <section id="evidence" class="section">
+      <h2>Evidence of Learning</h2>
+      <div class="grid-3">
+        
+        <div class="evidence-card" onclick="openModal('modal-cure')">
+          <div class="evidence-icon">🎮</div>
+          <div class="evidence-content">
+            <h4>C.U.R.E. Prototype</h4>
+            <p>A 3D game prototype featuring complex object-oriented logic, state management, and interaction scripting.</p>
+            <div style="margin-bottom: 0.5rem;"><span class="tag">Unity</span><span class="tag">C# Programming</span></div>
+            <div class="view-prompt">Click to view evidence →</div>
+          </div>
+        </div>
+        
+        <div class="evidence-card" onclick="openModal('modal-vr')">
+          <div class="evidence-icon">🥽</div>
+          <div class="evidence-content">
+            <h4>SchizoMind VR</h4>
+            <p>An immersive educational VR simulation utilizing Google VR toolkits, demonstrating software/hardware bridge capabilities.</p>
+            <div style="margin-bottom: 0.5rem;"><span class="tag">VR Development</span><span class="tag">Interactive Design</span></div>
+            <div class="view-prompt">Click to view evidence →</div>
+          </div>
+        </div>
+
+        <div class="evidence-card" onclick="openModal('modal-network')">
+          <div class="evidence-icon">🌐</div>
+          <div class="evidence-content">
+            <h4>Data Communication</h4>
+            <p>Academic coursework detailing the mapping of Data Communication models, OSI layers, and TCP/IP protocol suites.</p>
+            <div style="margin-bottom: 0.5rem;"><span class="tag">Coursework</span><span class="tag">Network Architecture</span></div>
+            <div class="view-prompt">Click to view evidence →</div>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <section id="reflection" class="section">
-      <h2>Learning Reflection</h2>
-      <div class="accordion open"><button onclick="toggleAcc(this)">What have I learned from Informatics Media? <span>+</span></button><div class="acc-body"><p>I learned that Informatics Media combines technology, design, communication, and user experience. A good digital product must not only function correctly, but must also be usable, attractive, accessible, and safe.</p></div></div>
-      <div class="accordion"><button onclick="toggleAcc(this)">How did project work improve my skills? <span>+</span></button><div class="acc-body"><p>Project work improved my ability to plan, design, test, and refine digital artefacts. It also helped me connect classroom theories with practical design and development tasks.</p></div></div>
-      <div class="accordion"><button onclick="toggleAcc(this)">Why is cybersecurity relevant to media students? <span>+</span></button><div class="acc-body"><p>Digital media platforms collect, display, and distribute information. Therefore, media technologists need basic awareness of authentication, privacy, safe communication, responsible content sharing, and secure web practices.</p></div></div>
-      <div class="accordion"><button onclick="toggleAcc(this)">What is my next improvement plan? <span>+</span></button><div class="acc-body"><p>I plan to improve JavaScript, UI/UX testing, secure web development, content strategy, and professional project documentation.</p></div></div>
-    </section>
+      <h2>Personal Reflection</h2>
+      <p style="margin-bottom: 1.5rem;"><strong>Target Dream Company:</strong> [Insert Your Dream Company Here]</p>
+      
+      <div class="qa-box">
+        <h4>Why do you want to work for this company?</h4>
+        <p>[Insert why their mission aligns with your interest. Example: "I admire your dedication to building secure educational platforms and your innovative approach to user privacy..."]</p>
+      </div>
 
-    <section id="checklist" class="section">
-      <h2>Interactive Portfolio Checklist</h2>
-      <p>Students can tick each item before submission. The progress bar updates automatically.</p>
-      <div class="card">
-        <div class="skill"><div class="skill-top"><span>Completion Progress</span><span id="progressText">0%</span></div><div class="bar"><div class="fill" id="progressFill"></div></div></div>
-        <div class="checklist">
-          <label class="check"><input type="checkbox" onchange="updateProgress()"><span><b>Profile completed</b><br><span class="mini">Includes name, programme, academic session, and professional summary.</span></span></label>
-          <label class="check"><input type="checkbox" onchange="updateProgress()"><span><b>Career goal stated</b><br><span class="mini">Career direction is aligned with Informatics Media graduate pathways.</span></span></label>
-          <label class="check"><input type="checkbox" onchange="updateProgress()"><span><b>Skills supported by evidence</b><br><span class="mini">Each key skill includes a project, artefact, or activity as evidence.</span></span></label>
-          <label class="check"><input type="checkbox" onchange="updateProgress()"><span><b>At least four academic projects included</b><br><span class="mini">Project entries include tools, outcome, and reflection.</span></span></label>
-          <label class="check"><input type="checkbox" onchange="updateProgress()"><span><b>Reflection is meaningful</b><br><span class="mini">Reflection explains learning, challenges, improvements, and future plans.</span></span></label>
-          <label class="check"><input type="checkbox" onchange="updateProgress()"><span><b>Portfolio is visually consistent</b><br><span class="mini">Uses consistent layout, fonts, colours, spacing, and navigation.</span></span></label>
-        </div>
+      <div class="qa-box">
+        <h4>What value can you bring / Why should we hire you?</h4>
+        <p>I bring a unique hybrid of interactive media development (Unity/VR) and a strong foundation in network communication. I understand not just how to build engaging applications that users love, but the underlying data structures and network layers that power them securely.</p>
+      </div>
+
+      <div class="qa-box">
+        <h4>What are your strengths and weaknesses?</h4>
+        <p><strong>Strengths:</strong> High adaptability and self-driven learning, evidenced by independently mastering complex visual tools alongside backend logic (Unity C#) to complete full-scale projects.<br><br>
+        <strong>Weaknesses:</strong> I am currently bridging the technical gap between standard software development and enterprise-level network security tools. I am actively closing this gap through my self-study and certification timeline outlined in my development plan.</p>
       </div>
     </section>
 
-    <section id="readiness" class="section">
-      <h2>Career Readiness Statement</h2>
-      <div class="grid cols-2">
-        <div class="card">
-          <h3>Professional Positioning</h3>
-          <p>As a Bachelor of Information Technology student specialising in Informatics Media, I am preparing for careers that require both technical and creative abilities. My portfolio shows capability in web development, UI/UX design, multimedia communication, and basic cybersecurity awareness.</p>
-          <p>I believe Informatics Media graduates can support organisations in developing digital platforms that are engaging, accessible, and safe for users.</p>
-        </div>
-        <div class="card">
-          <h3>Future Development Plan</h3>
-          <table><tr><th>Area</th><th>Action</th></tr><tr><td>Web Development</td><td>Build more interactive web applications using JavaScript frameworks.</td></tr><tr><td>UI/UX</td><td>Conduct structured usability testing with real users.</td></tr><tr><td>Cybersecurity</td><td>Learn secure coding, privacy-by-design, and basic web vulnerability concepts.</td></tr><tr><td>Media Production</td><td>Improve storytelling, editing, and analytics-based content design.</td></tr></table>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <div class="modal" id="modal" onclick="closeModal(event)">
-    <div class="modal-inner" onclick="event.stopPropagation()">
-      <div class="modal-head"><div><h2 id="modalTitle">Project</h2><p id="modalIntro" class="mini"></p></div><button class="x" onclick="closeModal()">Close</button></div>
-      <div id="modalBody"></div>
+  <div class="modal-overlay" id="modal-cure" onclick="closeModal('modal-cure')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeModal('modal-cure')">Close</button>
+      <h2>C.U.R.E. Prototype</h2>
+      <p class="modal-subtitle">A 3D game prototype featuring complex logic and C# programming.</p>
+      
+      <div class="modal-table">
+        <div class="modal-row">
+          <div class="modal-label">Tools Used</div>
+          <div class="modal-value">Unity, C#, Autodesk Maya, Blender, ZBrush</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Skills Demonstrated</div>
+          <div class="modal-value">Object-oriented programming, boss logic architecture, 3D asset generation, state management</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Suggested Evidence</div>
+          <div class="modal-value">C# scripts for character movement, screenshots of the Unity editor environment, generated 3D models</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Reflection</div>
+          <div class="modal-value">This project strengthened my ability to architect complex state machines in C# and gave me a deep understanding of how applications process logic natively.</div>
+        </div>
+      </div>
+      
+      <p class="modal-note">Student note: Provide actual screenshots or snippets of your C# scripts in your final submission document.</p>
     </div>
   </div>
 
-  <footer class="footer">
-    <p class="print-note">Printed from the Individual e-Portfolio template.</p>
-    <p>Example Individual e-Portfolio for Bachelor of Information Technology (Informatics Media). Replace sample details with actual student information and artefacts.</p>
-  </footer>
+  <div class="modal-overlay" id="modal-vr" onclick="closeModal('modal-vr')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeModal('modal-vr')">Close</button>
+      <h2>SchizoMind VR</h2>
+      <p class="modal-subtitle">An educational VR simulation designed to provide perspective on human perception.</p>
+      
+      <div class="modal-table">
+        <div class="modal-row">
+          <div class="modal-label">Tools Used</div>
+          <div class="modal-value">Unity 2019, Google VR (GVR) SDK</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Skills Demonstrated</div>
+          <div class="modal-value">Virtual reality deployment, interactive scripting, auditory and visual rendering pipelines</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Suggested Evidence</div>
+          <div class="modal-value">Project synopsis reports, screenshots of visual distortion implementations, GVR setup configurations</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Reflection</div>
+          <div class="modal-value">This project demonstrated how to bridge the gap between software development and hardware constraints, ensuring safe and responsive interactions.</div>
+        </div>
+      </div>
+      
+      <p class="modal-note">Student note: Provide actual screenshots or snippets of your VR environment in your final submission document.</p>
+    </div>
+  </div>
 
-<script>
-const projects = [
-  {title:'Personal Responsive Website',intro:'A personal branding website developed using HTML, CSS, and JavaScript.',tools:'HTML, CSS, JavaScript, Visual Studio Code, Canva',skills:'Responsive design, navigation structure, visual hierarchy, basic scripting',evidence:'Homepage screenshot, mobile view screenshot, project gallery, contact form mock-up',reflection:'This project strengthened my understanding of responsive web design and user-friendly navigation. I learned how to test layout consistency across different screen sizes.'},
-  {title:'UniEvent Mobile App Prototype',intro:'A mobile application prototype for university event discovery, registration, reminder, and feedback.',tools:'Figma, Canva, Google Forms',skills:'Wireframing, user flow, prototyping, interface evaluation, usability testing',evidence:'User persona, wireframe, high-fidelity screens, feedback summary',reflection:'I learned that UI/UX design must be based on user needs rather than appearance alone. Feedback helped me improve button placement and screen flow.'},
-  {title:'Cybersecurity Awareness Campaign',intro:'A digital awareness campaign to educate students about online safety.',tools:'Canva, CapCut, Google Sites, PowerPoint',skills:'Cybersecurity awareness, infographic design, digital communication, content simplification',evidence:'Phishing infographic, password safety video, privacy poster, awareness microsite',reflection:'This project helped me explain technical security concepts using simple visuals and student-friendly language.'},
-  {title:'Interactive Learning Material',intro:'A multimedia learning resource for basic networking concepts.',tools:'PowerPoint, H5P, Genially, Canva',skills:'Instructional design, multimedia integration, animation, learner engagement',evidence:'Interactive slides, quiz screenshot, network concept map, learner activity page',reflection:'I learned that multimedia learning must balance visuals and content clarity. Interactivity can support understanding when used purposefully.'},
-  {title:'Secure Login Interface',intro:'A prototype login interface designed with usability and security awareness features.',tools:'HTML, CSS, JavaScript, Figma',skills:'Form design, password visibility control, user feedback, security prompts',evidence:'Login page screenshot, validation examples, interface flow',reflection:'I learned that security features should be designed in a way that supports users instead of confusing them.'},
-  {title:'Digital Media Analytics Poster',intro:'An infographic explaining how digital media engagement can be measured.',tools:'Canva, Excel, PowerPoint',skills:'Data visualisation, infographic design, media analytics communication',evidence:'Poster, sample engagement chart, explanation notes',reflection:'This artefact improved my ability to translate data into meaningful visual communication.'}
-];
-function toggleTheme(){
-  const b=document.body;
-  b.dataset.theme=b.dataset.theme==='dark'?'light':'dark';
-}
-function openTab(evt,id){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
-  evt.currentTarget.classList.add('active');
-  document.getElementById(id).classList.add('active');
-}
-function filterProjects(cat,evt){
-  document.querySelectorAll('.filter').forEach(f=>f.classList.remove('active'));
-  evt.currentTarget.classList.add('active');
-  document.querySelectorAll('.project-card').forEach(card=>{
-    const cats=card.dataset.cat;
-    card.style.display=(cat==='all'||cats.includes(cat))?'block':'none';
-  });
-}
-function showProject(i){
-  const p=projects[i];
-  document.getElementById('modalTitle').textContent=p.title;
-  document.getElementById('modalIntro').textContent=p.intro;
-  document.getElementById('modalBody').innerHTML=`
-    <table>
-      <tr><th>Tools Used</th><td>${p.tools}</td></tr>
-      <tr><th>Skills Demonstrated</th><td>${p.skills}</td></tr>
-      <tr><th>Suggested Evidence</th><td>${p.evidence}</td></tr>
-      <tr><th>Reflection</th><td>${p.reflection}</td></tr>
-    </table>
-    <p style="margin-top:14px; font-size:0.85rem; color:var(--muted);">Student note: replace this sample text with your own project screenshots, file links, GitHub link, video link, or LMS submission evidence.</p>`;
-  document.getElementById('modal').classList.add('open');
-}
-function closeModal(e){
-  if(e && e.target.id!=='modal') return;
-  document.getElementById('modal').classList.remove('open');
-}
-function toggleAcc(btn){
-  btn.parentElement.classList.toggle('open');
-}
-function updateProgress(){
-  const boxes=[...document.querySelectorAll('#checklist input[type="checkbox"]')];
-  const checked=boxes.filter(b=>b.checked).length;
-  const pct=Math.round((checked/boxes.length)*100);
-  document.getElementById('progressText').textContent=pct+'%';
-  document.getElementById('progressFill').style.width=pct+'%';
-}
-function animateBars(){
-  document.querySelectorAll('.fill[data-w]').forEach(f=>{f.style.width=f.dataset.w});
-}
-window.addEventListener('load',()=>{animateBars();updateProgress();});
-window.addEventListener('keydown',e=>{if(e.key==='Escape') document.getElementById('modal').classList.remove('open')});
-</script>
+  <div class="modal-overlay" id="modal-network" onclick="closeModal('modal-network')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeModal('modal-network')">Close</button>
+      <h2>Data Communication (ITF33603)</h2>
+      <p class="modal-subtitle">Academic exploration of network architectures and data protocols.</p>
+      
+      <div class="modal-table">
+        <div class="modal-row">
+          <div class="modal-label">Tools Used</div>
+          <div class="modal-value">Course materials, network diagramming software</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Skills Demonstrated</div>
+          <div class="modal-value">Understanding OSI layers, TCP/IP protocols, and network layering fundamentals</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Suggested Evidence</div>
+          <div class="modal-value">Network architecture diagrams, coursework summaries, protocol analysis reports</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Reflection</div>
+          <div class="modal-value">This coursework provided the theoretical foundation needed to transition from standard application development into a security-focused role by understanding how data moves across systems.</div>
+        </div>
+      </div>
+      
+      <p class="modal-note">Student note: Provide actual PDFs or diagrams from your coursework in your final submission document.</p>
+    </div>
+  </div>
+
+  <script>
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevents scrolling behind the modal
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+      document.body.style.overflow = 'auto'; // Restores scrolling
+    }
+
+    // Allow closing modals with the Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        const activeModals = document.querySelectorAll('.modal-overlay.active');
+        activeModals.forEach(modal => {
+          modal.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
