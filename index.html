@@ -128,10 +128,10 @@
     .evidence-content p { font-size: 0.9rem; margin-bottom: 1rem; }
     .view-prompt { font-size: 0.85rem; color: var(--accent); font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem;}
 
-    /* MODAL (POP-UP) SYSTEM */
+    /* MODAL (POP-UP) SYSTEM - TABLE STYLE */
     .modal-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(15, 23, 42, 0.85); backdrop-filter: blur(4px);
+      background-color: rgba(15, 23, 42, 0.9); backdrop-filter: blur(5px);
       display: flex; align-items: center; justify-content: center;
       z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     }
@@ -139,32 +139,49 @@
     
     .modal-content {
       background-color: var(--bg-panel); border: 1px solid var(--border);
-      border-radius: 1rem; padding: 2.5rem; max-width: 700px; width: 90%; max-height: 90vh; overflow-y: auto;
+      border-radius: 1rem; padding: 2.5rem; max-width: 800px; width: 90%; max-height: 90vh; overflow-y: auto;
       position: relative; transform: translateY(20px); transition: transform 0.3s ease;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
     .modal-overlay.active .modal-content { transform: translateY(0); }
     
     .close-btn {
-      position: absolute; top: 1.25rem; right: 1.25rem;
-      background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 0.5rem;
-      color: var(--text-secondary); font-size: 1.25rem; cursor: pointer; 
-      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: transparent; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 9999px;
+      color: var(--text-primary); font-size: 0.85rem; cursor: pointer; 
+      padding: 0.5rem 1.2rem; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; font-weight: 500;
     }
-    .close-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .close-btn:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.2); }
     
-    .evidence-image {
-      width: 100%; height: auto; border-radius: 0.5rem; border: 1px solid var(--border);
-      margin: 1.5rem 0; display: block;
+    .modal-content h2 { border-bottom: none; margin-bottom: 0.25rem; padding-bottom: 0; color: #fff; font-size: 2.2rem; padding-right: 90px; }
+    .modal-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem; }
+
+    .modal-table {
+      display: flex; flex-direction: column;
+      border-radius: 0.5rem; overflow: hidden;
     }
-    .evidence-link {
-      display: inline-flex; align-items: center; justify-content: center;
-      background-color: var(--accent); color: #fff; text-decoration: none;
-      padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 500;
-      transition: background-color 0.2s;
+    .modal-row {
+      display: flex;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
-    .evidence-link:hover { background-color: var(--accent-hover); }
+    .modal-row:last-child { border-bottom: none; }
+    .modal-label {
+      width: 25%;
+      background-color: rgba(2, 132, 199, 0.15); /* Light blue tint */
+      padding: 1.5rem;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .modal-value {
+      width: 75%;
+      padding: 1.5rem;
+      color: var(--text-primary);
+      font-size: 1rem;
+      background-color: transparent;
+    }
+    .modal-note { font-size: 0.9rem; color: var(--text-secondary); margin-top: 2rem; }
 
     /* REFLECTION Q&A */
     .qa-box {
@@ -184,6 +201,9 @@
       .nav-menu { display: none; }
       .main-content { margin-left: 0; width: 100%; padding: 2rem 1.5rem; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .modal-row { flex-direction: column; }
+      .modal-label, .modal-value { width: 100%; padding: 1rem; }
+      .modal-content h2 { font-size: 1.5rem; }
     }
   </style>
 </head>
@@ -209,7 +229,6 @@
 
   <main class="main-content">
     
-    <!-- HEADER SECTION -->
     <section id="hero" class="section" style="margin-bottom: 4rem;">
       <span style="color: var(--accent); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">Individual E-Portfolio (20%)</span>
       <h1>Muhammad Syahmi bin Mohd Noor</h1>
@@ -223,7 +242,6 @@
       </div>
     </section>
 
-    <!-- CAREER EXPLORATION -->
     <section id="career" class="section">
       <h2>Career Exploration</h2>
       <div class="grid-2">
@@ -239,11 +257,9 @@
       </div>
     </section>
 
-    <!-- SKILLS ASSESSMENT -->
     <section id="skills" class="section">
       <h2>Personal Skills Assessment</h2>
       <div class="grid-2">
-        <!-- Technical Skills -->
         <div class="card">
           <h3>Current Technical Skills</h3>
           <div class="skill-item">
@@ -260,7 +276,6 @@
           </div>
         </div>
 
-        <!-- Soft Skills & Comparison -->
         <div class="card">
           <h3>Soft Skills</h3>
           <ul style="color: var(--text-secondary); margin-bottom: 2rem; padding-left: 1.2rem;">
@@ -274,7 +289,6 @@
       </div>
     </section>
 
-    <!-- CAREER DEVELOPMENT PLAN -->
     <section id="plan" class="section">
       <h2>Career Development Plan</h2>
       <div class="card">
@@ -303,12 +317,10 @@
       </div>
     </section>
 
-    <!-- EVIDENCE OF LEARNING (CLICKABLE CARDS) -->
     <section id="evidence" class="section">
       <h2>Evidence of Learning</h2>
       <div class="grid-3">
         
-        <!-- CARD 1 -->
         <div class="evidence-card" onclick="openModal('modal-cure')">
           <div class="evidence-icon">🎮</div>
           <div class="evidence-content">
@@ -319,7 +331,6 @@
           </div>
         </div>
         
-        <!-- CARD 2 -->
         <div class="evidence-card" onclick="openModal('modal-vr')">
           <div class="evidence-icon">🥽</div>
           <div class="evidence-content">
@@ -330,7 +341,6 @@
           </div>
         </div>
 
-        <!-- CARD 3 -->
         <div class="evidence-card" onclick="openModal('modal-network')">
           <div class="evidence-icon">🌐</div>
           <div class="evidence-content">
@@ -344,7 +354,6 @@
       </div>
     </section>
 
-    <!-- PERSONAL REFLECTION -->
     <section id="reflection" class="section">
       <h2>Personal Reflection</h2>
       <p style="margin-bottom: 2rem;"><strong>Target Dream Company:</strong> [Insert Your Dream Company Here]</p>
@@ -368,56 +377,93 @@
 
   </main>
 
-  <!-- ============================================== -->
-  <!-- MODAL POP-UPS FOR EVIDENCE -->
-  <!-- ============================================== -->
-
-  <!-- MODAL 1: C.U.R.E -->
   <div class="modal-overlay" id="modal-cure" onclick="closeModal('modal-cure')">
     <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="close-btn" onclick="closeModal('modal-cure')">✕</button>
-      <h3>C.U.R.E. Prototype</h3>
-      <p>This prototype demonstrates my ability to write complex, object-oriented C# code, manage game states, and handle user interactions securely within the Unity engine.</p>
+      <button class="close-btn" onclick="closeModal('modal-cure')">Close</button>
+      <h2>C.U.R.E. Prototype</h2>
+      <p class="modal-subtitle">A 3D game prototype featuring complex logic and C# programming.</p>
       
-      <!-- REPLACE THE SRC LINK BELOW WITH YOUR ACTUAL IMAGE LINK -->
-      <img src="https://via.placeholder.com/600x350?text=Insert+C.U.R.E+Screenshot+Here" alt="C.U.R.E Screenshot" class="evidence-image">
+      <div class="modal-table">
+        <div class="modal-row">
+          <div class="modal-label">Tools Used</div>
+          <div class="modal-value">Unity, C#, Autodesk Maya, Blender, ZBrush</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Skills Demonstrated</div>
+          <div class="modal-value">Object-oriented programming, boss logic architecture, 3D asset generation, state management</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Suggested Evidence</div>
+          <div class="modal-value">C# scripts for character movement, screenshots of the Unity editor environment, generated 3D models</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Reflection</div>
+          <div class="modal-value">This project strengthened my ability to architect complex state machines in C# and gave me a deep understanding of how applications process logic natively.</div>
+        </div>
+      </div>
       
-      <!-- REPLACE THE HREF LINK BELOW WITH YOUR ACTUAL GOOGLE DRIVE / GITHUB LINK -->
-      <a href="https://your-google-drive-link-here.com" target="_blank" class="evidence-link">View Full Evidence (Drive/GitHub) ↗</a>
+      <p class="modal-note">Student note: Provide actual screenshots or snippets of your C# scripts in your final submission document.</p>
     </div>
   </div>
 
-  <!-- MODAL 2: SchizoMind VR -->
   <div class="modal-overlay" id="modal-vr" onclick="closeModal('modal-vr')">
     <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="close-btn" onclick="closeModal('modal-vr')">✕</button>
-      <h3>SchizoMind VR</h3>
-      <p>An educational VR project built using Google VR toolkits. This highlights my capability to integrate software with hardware interfaces and build immersive logic.</p>
+      <button class="close-btn" onclick="closeModal('modal-vr')">Close</button>
+      <h2>SchizoMind VR</h2>
+      <p class="modal-subtitle">An educational VR simulation designed to provide perspective on human perception.</p>
       
-      <!-- REPLACE THE SRC LINK BELOW WITH YOUR ACTUAL IMAGE LINK -->
-      <img src="https://via.placeholder.com/600x350?text=Insert+SchizoMind+Screenshot+Here" alt="VR Screenshot" class="evidence-image">
+      <div class="modal-table">
+        <div class="modal-row">
+          <div class="modal-label">Tools Used</div>
+          <div class="modal-value">Unity 2019, Google VR (GVR) SDK</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Skills Demonstrated</div>
+          <div class="modal-value">Virtual reality deployment, interactive scripting, auditory and visual rendering pipelines</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Suggested Evidence</div>
+          <div class="modal-value">Project synopsis reports, screenshots of visual distortion implementations, GVR setup configurations</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Reflection</div>
+          <div class="modal-value">This project demonstrated how to bridge the gap between software development and hardware constraints, ensuring safe and responsive interactions.</div>
+        </div>
+      </div>
       
-      <!-- REPLACE THE HREF LINK BELOW WITH YOUR ACTUAL GOOGLE DRIVE / GITHUB LINK -->
-      <a href="https://your-google-drive-link-here.com" target="_blank" class="evidence-link">View Full Evidence (Drive/GitHub) ↗</a>
+      <p class="modal-note">Student note: Provide actual screenshots or snippets of your VR environment in your final submission document.</p>
     </div>
   </div>
 
-  <!-- MODAL 3: Data Communication -->
   <div class="modal-overlay" id="modal-network" onclick="closeModal('modal-network')">
     <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="close-btn" onclick="closeModal('modal-network')">✕</button>
-      <h3>Data Communication (ITF33603)</h3>
-      <p>Coursework evidence demonstrating my theoretical foundation in network layering, OSI models, and the TCP/IP protocol suite—essential knowledge for a security developer.</p>
+      <button class="close-btn" onclick="closeModal('modal-network')">Close</button>
+      <h2>Data Communication (ITF33603)</h2>
+      <p class="modal-subtitle">Academic exploration of network architectures and data protocols.</p>
       
-      <!-- REPLACE THE SRC LINK BELOW WITH YOUR ACTUAL IMAGE LINK -->
-      <img src="https://via.placeholder.com/600x350?text=Insert+Coursework+Screenshot+Here" alt="Coursework Screenshot" class="evidence-image">
+      <div class="modal-table">
+        <div class="modal-row">
+          <div class="modal-label">Tools Used</div>
+          <div class="modal-value">Course materials, network diagramming software</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Skills Demonstrated</div>
+          <div class="modal-value">Understanding OSI layers, TCP/IP protocols, and network layering fundamentals</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Suggested Evidence</div>
+          <div class="modal-value">Network architecture diagrams, coursework summaries, protocol analysis reports</div>
+        </div>
+        <div class="modal-row">
+          <div class="modal-label">Reflection</div>
+          <div class="modal-value">This coursework provided the theoretical foundation needed to transition from standard application development into a security-focused role by understanding how data moves across systems.</div>
+        </div>
+      </div>
       
-      <!-- REPLACE THE HREF LINK BELOW WITH YOUR ACTUAL GOOGLE DRIVE / PDF LINK -->
-      <a href="https://your-google-drive-link-here.com" target="_blank" class="evidence-link">View Coursework PDF ↗</a>
+      <p class="modal-note">Student note: Provide actual PDFs or diagrams from your coursework in your final submission document.</p>
     </div>
   </div>
 
-  <!-- JAVASCRIPT FOR MODALS -->
   <script>
     function openModal(modalId) {
       document.getElementById(modalId).classList.add('active');
