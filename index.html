@@ -114,7 +114,8 @@
     /* EVIDENCE GALLERY */
     .evidence-card {
       background-color: var(--bg-panel); border: 1px solid var(--border);
-      border-radius: 1rem; overflow: hidden; transition: transform 0.2s;
+      border-radius: 1rem; overflow: hidden; transition: transform 0.2s, border-color 0.2s;
+      cursor: pointer; position: relative;
     }
     .evidence-card:hover { transform: translateY(-4px); border-color: var(--accent); }
     .evidence-icon {
@@ -125,6 +126,45 @@
     .evidence-content { padding: 1.5rem; }
     .evidence-content h4 { margin: 0 0 0.5rem 0; font-size: 1.1rem; }
     .evidence-content p { font-size: 0.9rem; margin-bottom: 1rem; }
+    .view-prompt { font-size: 0.85rem; color: var(--accent); font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem;}
+
+    /* MODAL (POP-UP) SYSTEM */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(15, 23, 42, 0.85); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    
+    .modal-content {
+      background-color: var(--bg-panel); border: 1px solid var(--border);
+      border-radius: 1rem; padding: 2.5rem; max-width: 700px; width: 90%; max-height: 90vh; overflow-y: auto;
+      position: relative; transform: translateY(20px); transition: transform 0.3s ease;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    .modal-overlay.active .modal-content { transform: translateY(0); }
+    
+    .close-btn {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 0.5rem;
+      color: var(--text-secondary); font-size: 1.25rem; cursor: pointer; 
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .close-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    
+    .evidence-image {
+      width: 100%; height: auto; border-radius: 0.5rem; border: 1px solid var(--border);
+      margin: 1.5rem 0; display: block;
+    }
+    .evidence-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      background-color: var(--accent); color: #fff; text-decoration: none;
+      padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 500;
+      transition: background-color 0.2s;
+    }
+    .evidence-link:hover { background-color: var(--accent-hover); }
 
     /* REFLECTION Q&A */
     .qa-box {
@@ -263,36 +303,44 @@
       </div>
     </section>
 
-    <!-- EVIDENCE OF LEARNING -->
+    <!-- EVIDENCE OF LEARNING (CLICKABLE CARDS) -->
     <section id="evidence" class="section">
       <h2>Evidence of Learning</h2>
       <div class="grid-3">
-        <div class="evidence-card">
+        
+        <!-- CARD 1 -->
+        <div class="evidence-card" onclick="openModal('modal-cure')">
           <div class="evidence-icon">🎮</div>
           <div class="evidence-content">
             <h4>C.U.R.E. Prototype</h4>
             <p>A 3D game prototype featuring complex object-oriented logic, state management, and interaction scripting.</p>
-            <span class="tag">Unity</span><span class="tag">C# Programming</span>
+            <div><span class="tag">Unity</span><span class="tag">C# Programming</span></div>
+            <div class="view-prompt">Click to view evidence →</div>
           </div>
         </div>
         
-        <div class="evidence-card">
+        <!-- CARD 2 -->
+        <div class="evidence-card" onclick="openModal('modal-vr')">
           <div class="evidence-icon">🥽</div>
           <div class="evidence-content">
             <h4>SchizoMind VR</h4>
             <p>An immersive educational VR simulation utilizing Google VR toolkits, demonstrating software/hardware bridge capabilities.</p>
-            <span class="tag">VR Development</span><span class="tag">Interactive Design</span>
+            <div><span class="tag">VR Development</span><span class="tag">Interactive Design</span></div>
+            <div class="view-prompt">Click to view evidence →</div>
           </div>
         </div>
 
-        <div class="evidence-card">
+        <!-- CARD 3 -->
+        <div class="evidence-card" onclick="openModal('modal-network')">
           <div class="evidence-icon">🌐</div>
           <div class="evidence-content">
-            <h4>Data Communication (ITF33603)</h4>
+            <h4>Data Communication</h4>
             <p>Academic coursework detailing the mapping of Data Communication models, OSI layers, and TCP/IP protocol suites.</p>
-            <span class="tag">Coursework</span><span class="tag">Network Architecture</span>
+            <div><span class="tag">Coursework</span><span class="tag">Network Architecture</span></div>
+            <div class="view-prompt">Click to view evidence →</div>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -319,5 +367,79 @@
     </section>
 
   </main>
+
+  <!-- ============================================== -->
+  <!-- MODAL POP-UPS FOR EVIDENCE -->
+  <!-- ============================================== -->
+
+  <!-- MODAL 1: C.U.R.E -->
+  <div class="modal-overlay" id="modal-cure" onclick="closeModal('modal-cure')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeModal('modal-cure')">✕</button>
+      <h3>C.U.R.E. Prototype</h3>
+      <p>This prototype demonstrates my ability to write complex, object-oriented C# code, manage game states, and handle user interactions securely within the Unity engine.</p>
+      
+      <!-- REPLACE THE SRC LINK BELOW WITH YOUR ACTUAL IMAGE LINK -->
+      <img src="https://via.placeholder.com/600x350?text=Insert+C.U.R.E+Screenshot+Here" alt="C.U.R.E Screenshot" class="evidence-image">
+      
+      <!-- REPLACE THE HREF LINK BELOW WITH YOUR ACTUAL GOOGLE DRIVE / GITHUB LINK -->
+      <a href="https://your-google-drive-link-here.com" target="_blank" class="evidence-link">View Full Evidence (Drive/GitHub) ↗</a>
+    </div>
+  </div>
+
+  <!-- MODAL 2: SchizoMind VR -->
+  <div class="modal-overlay" id="modal-vr" onclick="closeModal('modal-vr')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeModal('modal-vr')">✕</button>
+      <h3>SchizoMind VR</h3>
+      <p>An educational VR project built using Google VR toolkits. This highlights my capability to integrate software with hardware interfaces and build immersive logic.</p>
+      
+      <!-- REPLACE THE SRC LINK BELOW WITH YOUR ACTUAL IMAGE LINK -->
+      <img src="https://via.placeholder.com/600x350?text=Insert+SchizoMind+Screenshot+Here" alt="VR Screenshot" class="evidence-image">
+      
+      <!-- REPLACE THE HREF LINK BELOW WITH YOUR ACTUAL GOOGLE DRIVE / GITHUB LINK -->
+      <a href="https://your-google-drive-link-here.com" target="_blank" class="evidence-link">View Full Evidence (Drive/GitHub) ↗</a>
+    </div>
+  </div>
+
+  <!-- MODAL 3: Data Communication -->
+  <div class="modal-overlay" id="modal-network" onclick="closeModal('modal-network')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeModal('modal-network')">✕</button>
+      <h3>Data Communication (ITF33603)</h3>
+      <p>Coursework evidence demonstrating my theoretical foundation in network layering, OSI models, and the TCP/IP protocol suite—essential knowledge for a security developer.</p>
+      
+      <!-- REPLACE THE SRC LINK BELOW WITH YOUR ACTUAL IMAGE LINK -->
+      <img src="https://via.placeholder.com/600x350?text=Insert+Coursework+Screenshot+Here" alt="Coursework Screenshot" class="evidence-image">
+      
+      <!-- REPLACE THE HREF LINK BELOW WITH YOUR ACTUAL GOOGLE DRIVE / PDF LINK -->
+      <a href="https://your-google-drive-link-here.com" target="_blank" class="evidence-link">View Coursework PDF ↗</a>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT FOR MODALS -->
+  <script>
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevents scrolling behind the modal
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+      document.body.style.overflow = 'auto'; // Restores scrolling
+    }
+
+    // Allow closing modals with the Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        const activeModals = document.querySelectorAll('.modal-overlay.active');
+        activeModals.forEach(modal => {
+          modal.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
