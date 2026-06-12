@@ -157,24 +157,21 @@
       cursor: pointer; display: flex; flex-direction: column;
     }
     .evidence-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); border-color: rgba(56, 189, 248, 0.4); }
-    
     .evidence-icon {
-      height: 110px; /* Fixed height for the banner area */
-      background: var(--bg-main);
+      height: 110px; background: var(--bg-main);
       display: flex; align-items: center; justify-content: center;
       border-bottom: 1px solid var(--border);
-      overflow: hidden; /* Ensures the zoomed image doesn't break out of the box */
+      overflow: hidden; 
     }
     
-    /* UPDATED: CSS for Cover Images */
     .evidence-icon img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Makes the image fill the entire 110px rectangle beautifully */
+      object-fit: cover; 
       transition: transform 0.4s ease;
     }
     .evidence-card:hover .evidence-icon img {
-      transform: scale(1.08); /* Smooth zoom effect on hover */
+      transform: scale(1.08); 
     }
 
     .evidence-content { padding: 1.25rem; flex-grow: 1; display: flex; flex-direction: column; }
@@ -331,7 +328,6 @@
 </head>
 <body>
 
-  <!-- DYNAMIC BACKGROUND LAYER -->
   <div class="bg-gradient" id="bg-gradient"></div>
 
   <header class="topbar">
@@ -489,20 +485,19 @@
     <section id="reflection" class="section reveal">
       <h2>Personal Reflection</h2>
       
-      <!-- HIGHLIGHT BOX -->
       <div class="dream-company-box">
         <span class="label">Target Dream Company</span>
-        <h3 class="company-name">Carsome (Malaysia)</h3>
+        <h3 class="company-name">LGMS Berhad (Malaysia)</h3>
       </div>
       
       <div class="qa-box">
         <h4>Why do you want to work for this company?</h4>
-        <p>I deeply admire Carsome's position as Southeast Asia's leading automotive e-commerce platform. Combining my personal interest in automotive technology and vehicle security with my drive to secure large-scale digital applications makes Carsome my ideal technical environment.</p>
+        <p>I deeply admire LGMS as one of Southeast Asia's premier cybersecurity consulting and penetration testing firms. Your company's dedication to proactive vulnerability assessment and establishing secure digital ecosystems perfectly aligns with my goal of becoming a top-tier Application Security Engineer.</p>
       </div>
 
       <div class="qa-box">
         <h4>What value can you bring / Why should we hire you?</h4>
-        <p>I bring a hybrid of hands-on application development (CSS/PHP/JS/C#) and a strong foundation in network communication. Having built and deployed web applications and digital interfaces myself, I understand developer workflows from the inside out, making me uniquely positioned to secure code efficiently without disrupting the development lifecycle.</p>
+        <p>I bring a unique hybrid of hands-on application development (CSS/PHP/JS/C#) and a strong foundation in network communication. Because I have built and deployed full-stack web applications and digital interfaces myself, I understand developer workflows from the inside out. This makes me uniquely positioned to hunt for vulnerabilities and secure code efficiently without disrupting the software development lifecycle.</p>
       </div>
 
       <div class="qa-box">
@@ -514,11 +509,6 @@
 
   </main>
 
-  <!-- ============================================== -->
-  <!-- MODALS FOR EVIDENCE (WITH IMAGE GALLERY)       -->
-  <!-- ============================================== -->
-
-  <!-- MODAL 0: WEB APPLICATION -->
   <div class="modal-overlay" id="modal-web" onclick="closeModal('modal-web')">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="close-btn" onclick="closeModal('modal-web')">Close</button>
@@ -553,7 +543,6 @@
     </div>
   </div>
 
-  <!-- MODAL 1: C.U.R.E. -->
   <div class="modal-overlay" id="modal-cure" onclick="closeModal('modal-cure')">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="close-btn" onclick="closeModal('modal-cure')">Close</button>
@@ -588,7 +577,6 @@
     </div>
   </div>
 
-  <!-- MODAL 2: SchizoMind VR -->
   <div class="modal-overlay" id="modal-vr" onclick="closeModal('modal-vr')">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="close-btn" onclick="closeModal('modal-vr')">Close</button>
@@ -624,7 +612,6 @@
     </div>
   </div>
 
-  <!-- FULL-SCREEN LIGHTBOX MODAL -->
   <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
     <button class="lightbox-close" onclick="closeLightbox()">✕</button>
     <img src="" class="lightbox-img" id="lightbox-img" alt="Enlarged Evidence" onclick="event.stopPropagation()">
